@@ -80,6 +80,33 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Enable/Disable output of compile commands during generation.
 CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF
 
+//Fortran compiler
+CMAKE_Fortran_COMPILER:FILEPATH=/usr/local/bin/gfortran
+
+//A wrapper around 'ar' adding the appropriate '--plugin' option
+// for the GCC compiler
+CMAKE_Fortran_COMPILER_AR:FILEPATH=/usr/local/bin/gcc-ar-7
+
+//A wrapper around 'ranlib' adding the appropriate '--plugin' option
+// for the GCC compiler
+CMAKE_Fortran_COMPILER_RANLIB:FILEPATH=/usr/local/bin/gcc-ranlib-7
+
+//Flags for Fortran compiler.
+CMAKE_Fortran_FLAGS:STRING=
+
+//Flags used by the compiler during debug builds.
+CMAKE_Fortran_FLAGS_DEBUG:STRING=-g
+
+//Flags used by the compiler during release builds for minimum
+// size.
+CMAKE_Fortran_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG -Os
+
+//Flags used by the compiler during release builds.
+CMAKE_Fortran_FLAGS_RELEASE:STRING=-O3 -DNDEBUG -O3
+
+//Flags used by the compiler during release builds with debug info.
+CMAKE_Fortran_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+
 //Path to a program.
 CMAKE_INSTALL_NAME_TOOL:FILEPATH=/usr/bin/install_name_tool
 
@@ -256,6 +283,22 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1
 //Name of external makefile project generator.
 CMAKE_EXTRA_GENERATOR:INTERNAL=
+//ADVANCED property for variable: CMAKE_Fortran_COMPILER
+CMAKE_Fortran_COMPILER-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_COMPILER_AR
+CMAKE_Fortran_COMPILER_AR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_COMPILER_RANLIB
+CMAKE_Fortran_COMPILER_RANLIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_FLAGS
+CMAKE_Fortran_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_FLAGS_DEBUG
+CMAKE_Fortran_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_FLAGS_MINSIZEREL
+CMAKE_Fortran_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_FLAGS_RELEASE
+CMAKE_Fortran_FLAGS_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_FLAGS_RELWITHDEBINFO
+CMAKE_Fortran_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //Name of generator.
 CMAKE_GENERATOR:INTERNAL=Unix Makefiles
 //Name of generator platform.

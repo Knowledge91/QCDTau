@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/knowledge/Developer/Physics/PhD/Program/build/CMakeFiles /Users/knowledge/Developer/Physics/PhD/Program/build/CMakeFiles/progress.marks
-	$(MAKE) -f CMakeFiles/Makefile2 all
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/knowledge/Developer/Physics/PhD/Program/build/CMakeFiles /Users/knowledge/Developer/Physics/PhD/Program/build/SRC/Frameworks/ALEPH/CMakeFiles/progress.marks
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(MAKE) -f CMakeFiles/Makefile2 SRC/Frameworks/ALEPH/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/knowledge/Developer/Physics/PhD/Program/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) -f CMakeFiles/Makefile2 clean
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(MAKE) -f CMakeFiles/Makefile2 SRC/Frameworks/ALEPH/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,71 +97,60 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(MAKE) -f CMakeFiles/Makefile2 SRC/Frameworks/ALEPH/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(MAKE) -f CMakeFiles/Makefile2 SRC/Frameworks/ALEPH/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named QCDTau
+# Convenience name for target.
+SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/rule:
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(MAKE) -f CMakeFiles/Makefile2 SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/rule
+.PHONY : SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/rule
 
-# Build rule for target.
-QCDTau: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 QCDTau
-.PHONY : QCDTau
+# Convenience name for target.
+CRunDec: SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/rule
 
-# fast build rule for target.
-QCDTau/fast:
-	$(MAKE) -f CMakeFiles/QCDTau.dir/build.make CMakeFiles/QCDTau.dir/build
-.PHONY : QCDTau/fast
-
-#=============================================================================
-# Target rules for targets named CRunDec
-
-# Build rule for target.
-CRunDec: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 CRunDec
 .PHONY : CRunDec
 
 # fast build rule for target.
 CRunDec/fast:
-	$(MAKE) -f SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/build.make SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/build
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(MAKE) -f SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/build.make SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/build
 .PHONY : CRunDec/fast
 
-main.o: main.cpp.o
+CRunDec.o: CRunDec.cpp.o
 
-.PHONY : main.o
+.PHONY : CRunDec.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/QCDTau.dir/build.make CMakeFiles/QCDTau.dir/main.cpp.o
-.PHONY : main.cpp.o
+CRunDec.cpp.o:
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(MAKE) -f SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/build.make SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/CRunDec.cpp.o
+.PHONY : CRunDec.cpp.o
 
-main.i: main.cpp.i
+CRunDec.i: CRunDec.cpp.i
 
-.PHONY : main.i
+.PHONY : CRunDec.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/QCDTau.dir/build.make CMakeFiles/QCDTau.dir/main.cpp.i
-.PHONY : main.cpp.i
+CRunDec.cpp.i:
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(MAKE) -f SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/build.make SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/CRunDec.cpp.i
+.PHONY : CRunDec.cpp.i
 
-main.s: main.cpp.s
+CRunDec.s: CRunDec.cpp.s
 
-.PHONY : main.s
+.PHONY : CRunDec.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/QCDTau.dir/build.make CMakeFiles/QCDTau.dir/main.cpp.s
-.PHONY : main.cpp.s
+CRunDec.cpp.s:
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(MAKE) -f SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/build.make SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/CRunDec.cpp.s
+.PHONY : CRunDec.cpp.s
 
 # Help Target
 help:
@@ -171,11 +160,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... QCDTau"
 	@echo "... CRunDec"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... CRunDec.o"
+	@echo "... CRunDec.i"
+	@echo "... CRunDec.s"
 .PHONY : help
 
 
@@ -187,6 +175,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/knowledge/Developer/Physics/PhD/Program/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

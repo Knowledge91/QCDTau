@@ -4,6 +4,13 @@
 
 using namespace std;
 
+extern"C" {
+  double vphlmntv2_(double *energy, double *vprehadsp, double *vprehadtm, double *vpimhad, double *vprelepsp, double *vpreleptm, double *vpimlep, double *vpretopsp, double *vpretoptm, int *nrflag);
+}
+extern"C" {
+  void aleph_vplusa_(double *sbin, double *dsbin, double *sfm2, double *derr, double (*corerr)[80]);
+}
+
 int main(){
 
   cout << "------------------------------------------------------------" << endl;

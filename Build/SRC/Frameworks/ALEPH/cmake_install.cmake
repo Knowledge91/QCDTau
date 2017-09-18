@@ -1,4 +1,4 @@
-# Install script for directory: /Users/knowledge/Developer/Physics/PhD/Program/SRC/Frameworks
+# Install script for directory: /Users/knowledge/Developer/Physics/PhD/Program/SRC/Frameworks/CRunDec
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -25,11 +25,5 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   else()
     set(CMAKE_INSTALL_COMPONENT)
   endif()
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
-  include("/Users/knowledge/Developer/Physics/PhD/Program/build/SRC/Frameworks/ALEPH/cmake_install.cmake")
-
 endif()
 
