@@ -16,6 +16,7 @@ int main(){
   double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
   aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
 
+  cout << "data" << endl;
   for(int i = 0; i < 80; i++) {
     cout << sbin[i] << endl;
   }
