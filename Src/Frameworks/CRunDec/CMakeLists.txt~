@@ -1,0 +1,3 @@
+set(SOURCES CRunDec.cpp)
+set(HEADERS CRunDec.h)
+

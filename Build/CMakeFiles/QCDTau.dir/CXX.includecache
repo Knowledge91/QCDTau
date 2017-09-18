@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../SRC/Frameworks/CRunDec/./CRunDec.h
+
+/Users/knowledge/Developer/Physics/PhD/Program/main.cpp
+iostream
+-
+cmath
+-
+CRunDec.h
+/Users/knowledge/Developer/Physics/PhD/Program/CRunDec.h
+

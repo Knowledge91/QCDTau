@@ -1,0 +1,10 @@
+/Users/knowledge/Developer/Physics/PhD/Program/build/CMakeFiles/rebuild_cache.dir
+/Users/knowledge/Developer/Physics/PhD/Program/build/CMakeFiles/edit_cache.dir
+/Users/knowledge/Developer/Physics/PhD/Program/build/CMakeFiles/QCDTau.dir
+/Users/knowledge/Developer/Physics/PhD/Program/build/SRC/CMakeFiles/rebuild_cache.dir
+/Users/knowledge/Developer/Physics/PhD/Program/build/SRC/CMakeFiles/edit_cache.dir
+/Users/knowledge/Developer/Physics/PhD/Program/build/SRC/Frameworks/CMakeFiles/rebuild_cache.dir
+/Users/knowledge/Developer/Physics/PhD/Program/build/SRC/Frameworks/CMakeFiles/edit_cache.dir
+/Users/knowledge/Developer/Physics/PhD/Program/build/SRC/Frameworks/CRunDec/CMakeFiles/rebuild_cache.dir
+/Users/knowledge/Developer/Physics/PhD/Program/build/SRC/Frameworks/CRunDec/CMakeFiles/edit_cache.dir
+/Users/knowledge/Developer/Physics/PhD/Program/build/SRC/Frameworks/CRunDec/CMakeFiles/CRunDec.dir
