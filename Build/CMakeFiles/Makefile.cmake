@@ -9,6 +9,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "../CMakeLists.txt"
   "../SRC/CMakeLists.txt"
+  "../SRC/Frameworks/ALEPH/CMakeLists.txt"
   "../SRC/Frameworks/CMakeLists.txt"
   "../SRC/Frameworks/CRunDec/CMakeLists.txt"
   "CMakeFiles/3.9.2/CMakeCXXCompiler.cmake"
@@ -47,11 +48,13 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "SRC/CMakeFiles/CMakeDirectoryInformation.cmake"
   "SRC/Frameworks/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "SRC/Frameworks/CRunDec/CMakeFiles/CMakeDirectoryInformation.cmake"
   "SRC/Frameworks/ALEPH/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/QCDTau.dir/DependInfo.cmake"
-  "SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/DependInfo.cmake"
+  "SRC/Frameworks/CRunDec/CMakeFiles/CRunDec.dir/DependInfo.cmake"
+  "SRC/Frameworks/ALEPH/CMakeFiles/ALEPH.dir/DependInfo.cmake"
   )

@@ -133,8 +133,21 @@ CRunDec: cmake_check_build_system
 
 # fast build rule for target.
 CRunDec/fast:
-	$(MAKE) -f SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/build.make SRC/Frameworks/ALEPH/CMakeFiles/CRunDec.dir/build
+	$(MAKE) -f SRC/Frameworks/CRunDec/CMakeFiles/CRunDec.dir/build.make SRC/Frameworks/CRunDec/CMakeFiles/CRunDec.dir/build
 .PHONY : CRunDec/fast
+
+#=============================================================================
+# Target rules for targets named ALEPH
+
+# Build rule for target.
+ALEPH: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ALEPH
+.PHONY : ALEPH
+
+# fast build rule for target.
+ALEPH/fast:
+	$(MAKE) -f SRC/Frameworks/ALEPH/CMakeFiles/ALEPH.dir/build.make SRC/Frameworks/ALEPH/CMakeFiles/ALEPH.dir/build
+.PHONY : ALEPH/fast
 
 main.o: main.cpp.o
 
@@ -173,6 +186,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... QCDTau"
 	@echo "... CRunDec"
+	@echo "... ALEPH"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

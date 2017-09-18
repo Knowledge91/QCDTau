@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/knowledge/Developer/Physics/PhD/Program/SRC -I/Users/knowledge/Developer/Physics/PhD/Program/SRC/Frameworks -I/Users/knowledge/Developer/Physics/PhD/Program/SRC/Frameworks/CRunDec -I/Users/knowledge/Developer/Physics/PhD/Program/SRC/Frameworks/CRunDec/. 
+CXX_INCLUDES = -I/Users/knowledge/Developer/Physics/PhD/Program/SRC -I/Users/knowledge/Developer/Physics/PhD/Program/SRC/Frameworks/CRunDec/. 
 

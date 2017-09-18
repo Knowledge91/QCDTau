@@ -29,6 +29,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+  include("/Users/knowledge/Developer/Physics/PhD/Program/build/SRC/Frameworks/CRunDec/cmake_install.cmake")
   include("/Users/knowledge/Developer/Physics/PhD/Program/build/SRC/Frameworks/ALEPH/cmake_install.cmake")
 
 endif()

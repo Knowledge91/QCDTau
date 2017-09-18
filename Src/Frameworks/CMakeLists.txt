@@ -1,3 +1,5 @@
-include_directories(CRunDec ALEPH)
-add_subdirectory(CRunDec ALEPH)
+add_subdirectory(CRunDec)
+add_subdirectory(ALEPH)
+
+
 

@@ -90,7 +90,8 @@ QCDTau_EXTERNAL_OBJECTS =
 
 QCDTau: CMakeFiles/QCDTau.dir/main.cpp.o
 QCDTau: CMakeFiles/QCDTau.dir/build.make
-QCDTau: SRC/Frameworks/ALEPH/libCRunDec.a
+QCDTau: SRC/Frameworks/CRunDec/libCRunDec.a
+QCDTau: SRC/Frameworks/ALEPH/libALEPH.a
 QCDTau: CMakeFiles/QCDTau.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/knowledge/Developer/Physics/PhD/Program/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable QCDTau"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/QCDTau.dir/link.txt --verbose=$(VERBOSE)

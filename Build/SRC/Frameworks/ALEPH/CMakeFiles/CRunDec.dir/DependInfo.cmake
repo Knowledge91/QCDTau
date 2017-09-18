@@ -11,9 +11,6 @@ set(CMAKE_CXX_COMPILER_ID "AppleClang")
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../SRC"
-  "../SRC/Frameworks"
-  "../SRC/Frameworks/CRunDec"
-  "../SRC/Frameworks/ALEPH"
   "../SRC/Frameworks/CRunDec/."
   )
 
