@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "CRunDec.h"
-
+#include "Numerics.h"
 using namespace std;
 
 extern"C" {
@@ -10,8 +10,12 @@ extern"C" {
 extern"C" {
   void aleph_vplusa_(double *sbin, double *dsbin, double *sfm2, double *derr, double (*corerr)[80]);
 }
-
+double testFunc(double x) {
+  return x*x*x + 8*x*x + 23.;
+}
 int main(){
+
+  cout << Numerics::qgauss(testFunc, 5., 12.) << endl;
 
   double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
   aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
