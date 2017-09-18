@@ -1,2 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libALEPH.a  CMakeFiles/ALEPH.dir/aleph14_vpa.f90.o CMakeFiles/ALEPH.dir/num_const.f90.o
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libALEPH.a
