@@ -1,2 +1,0 @@
-include_directories(CRunDec ALEPH)
-add_subdirectory(CRunDec ALEPH)
