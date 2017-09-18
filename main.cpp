@@ -16,7 +16,6 @@ double testFunc(double x) {
 int main(){
 
   cout << Numerics::qgauss(testFunc, 5., 12.) << endl;
-
   double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
   aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
 

@@ -6,7 +6,11 @@
 
 using namespace std;
 
+
+// Numerical Operations
+// -> Integration : Gaussian Quadratures
 class Numerics {
+  // Returns weights and abcisas needed for Gaussian Quadratures (Numerics::qgauss)
   static void gauleg(const double x1, const double x2, vector<double> &x, vector<double> &w) {
     const double EPS=1.0e-14;
     double z1, z, xm, xl, pp, p3, p2, p1;
@@ -38,14 +42,14 @@ class Numerics {
   }
 
  public:
+  // Integration: Gaussian Quadratures
+  // Integrates any function from a to b
   template <class T>
   static double qgauss(T &func, const double a, const double b) {
     vector<double> w(100);
     vector<double> x(100);
     Numerics::gauleg(a, b, x, w);
-
     double s = 0;
-
     for(int j=0; j<x.size(); j++) {
       s += w[j]*func(x[j]);
     }
