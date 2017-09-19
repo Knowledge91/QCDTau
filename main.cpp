@@ -2,6 +2,7 @@
 #include <cmath>
 #include "CRunDec.h"
 #include "Numerics.h"
+#include "nr3.h"
 using namespace std;
 
 extern"C" {
@@ -18,7 +19,6 @@ double testFunc2(double x) {
   return 3*x*x - 7*x;
 }
 int main(){
-
   double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
   aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
 

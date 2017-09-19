@@ -14,8 +14,9 @@ set(CMAKE_Fortran_COMPILER "/usr/local/bin/gfortran")
 include_directories(SRC)
 add_subdirectory(SRC)
 
+
 add_executable(QCDTau main.cpp)
-target_link_libraries(QCDTau PUBLIC CRunDec ALEPH)
+target_link_libraries(QCDTau PUBLIC CRunDec ALEPH NR3)
 
 ################################
 # Testing

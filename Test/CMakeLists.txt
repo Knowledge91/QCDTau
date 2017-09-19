@@ -16,4 +16,4 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 set(SOURCES TestNumerics.cpp)
 
 add_executable(runUnitTests ${SOURCES})
-target_link_libraries(runUnitTests gtest gtest_main)
+target_link_libraries(runUnitTests gtest gtest_main NR3 ALEPH CRunDec)
