@@ -13,5 +13,7 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 ##############
 # Unit Tests
 ##############
-add_executable(runUnitTests test.cpp)
+set(SOURCES TestNumerics.cpp)
+
+add_executable(runUnitTests ${SOURCES})
 target_link_libraries(runUnitTests gtest gtest_main)

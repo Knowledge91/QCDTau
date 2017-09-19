@@ -2,6 +2,7 @@
 #ifndef NUMERICS_H
 #define NUMERICS_H
 
+#include <cmath>
 #include <vector>
 
 using namespace std;
@@ -11,9 +12,10 @@ using namespace std;
 // -> Integration : Gaussian Quadratures
 class Numerics {
   // Returns weights and abcisas needed for Gaussian Quadratures (Numerics::qgauss)
-  static void gauleg(const double x1, const double x2, vector<double> &x, vector<double> &w) {
-    const double EPS=1.0e-14;
-    double z1, z, xm, xl, pp, p3, p2, p1;
+  template <typename T>
+  static void gauleg(const T x1, const T x2, vector<T> &x, vector<T> &w) {
+    const double EPS=1.0e-15;
+    T z1, z, xm, xl, pp, p3, p2, p1;
     int n = x.size();
     int m = (n+1)/2;
     xm = 0.5*(x2+x1);
@@ -28,9 +30,11 @@ class Numerics {
         for (int j=0; j<n; j++) {
           p3 = p2;
           p2 = p1;
-          p1 = ((2.0*j+1.0)*z*p2-j*p3)/(j+1);
+          T jComplx(j);
+          p1 = ((2.0*jComplx+1.0)*z*p2-jComplx*p3)/(jComplx+1.);
         }
-        pp = n*(z*p1-p2)/(z*z-1.0);
+        T nComplx(n);
+        pp = nComplx*(z*p1-p2)/(z*z-1.0);
         z1 = z;
         z = z1-p1/pp;
       } while (abs(z-z1) > EPS);
@@ -44,17 +48,17 @@ class Numerics {
  public:
   // Integration: Gaussian Quadratures
   // Integrates any function from a to b
-  template <class T>
-  static double qgauss(T &func, const double a, const double b) {
-    vector<double> w(100);
-    vector<double> x(100);
+  template <typename T, typename Func>
+  static T qgauss(Func &func, const T a, const T b) {
+    vector<T> w(1201);
+    vector<T> x(1201);
     Numerics::gauleg(a, b, x, w);
-    double s = 0;
+    T s = 0;
     for(int j=0; j<x.size(); j++) {
       s += w[j]*func(x[j]);
     }
     return s;
   };
-};
 
+};
 #endif
