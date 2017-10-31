@@ -50,7 +50,7 @@ class Numerics {
   // Integration: Gaussian Quadratures
   // Integrates any function from a to b
   template <typename T, typename Func>
-  static T qgauss(Func &func, const T a, const T b) {
+  static T Integrate(Func &func, const T a, const T b) {
     vector<T> w(1201);
     vector<T> x(1201);
     Numerics::gauleg(a, b, x, w);

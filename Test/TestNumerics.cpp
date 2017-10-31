@@ -16,14 +16,13 @@ complex<double> complexFunc(complex<double> x) {
 const double maxError = 1e-15;
 
 TEST(IntegralTest, Real) {
-  ASSERT_NEAR(Numerics::qgauss(realFunc, -0.2, 0.5), -0.602, maxError);
-
+  ASSERT_NEAR(Numerics::Integrate(realFunc, -0.2, 0.5), -0.602, maxError);
 }
 
 TEST(IntegralTest, Complex) {
   complex<double> a = -0.1+1i*0.1;
   complex<double> b = 0.3-1i*0.3;
-  complex<double> r = Numerics::qgauss(complexFunc, a, b);
+  complex<double> r = Numerics::Integrate(complexFunc, a, b);
 
   ASSERT_NEAR(r.real(), -0.32, maxError);
   ASSERT_NEAR(r.imag(), -0.24, maxError);

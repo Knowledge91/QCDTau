@@ -2,15 +2,13 @@
 #include <cmath>
 #include "CRunDec.h"
 #include "Numerics.h"
+#include "Experiment.h"
+#include "Weights.h"
+#include "Constants.h"
 #include "nr3.h"
+
 using namespace std;
 
-extern"C" {
-  double vphlmntv2_(double *energy, double *vprehadsp, double *vprehadtm, double *vpimhad, double *vprelepsp, double *vpreleptm, double *vpimlep, double *vpretopsp, double *vpretoptm, int *nrflag);
-}
-extern"C" {
-  void aleph_vplusa_(double *sbin, double *dsbin, double *sfm2, double *derr, double (*corerr)[80]);
-}
 double testFunc(double x) {
   return x*x*x + 8*x*x + 23.;
 }
@@ -19,13 +17,15 @@ double testFunc2(double x) {
   return 3*x*x - 7*x;
 }
 int main(){
-  double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
-  aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
+  Experiment E;
+  Constants C(3);
 
-  cout << "data" << endl;
-  for(int i = 0; i < 80; i++) {
-    cout << sbin[i] << endl;
-  }
+  cout << setprecision(15);
+  cout << "Constant \t" << C.nf << "\t" << C.beta[1] << "\t" << C.c[1][1] << endl;
+  cout << "Experiment SpectralMoment" << endl;
+  cout << "Spec Mom at STAU and WD00" <<  E.SpectralMoment(2.1, Weights::WD00) << endl;
+  //E.outErrorMatrix(16, 17);
+
 
   cout << "------------------------------------------------------------" << endl;
 
