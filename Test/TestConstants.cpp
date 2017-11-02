@@ -4,11 +4,12 @@
 
 
 // Tests for nf = 3
-Constants C(3);
+Constants C(3,3,4);
 
 TEST(ConstantsTest, Zeta) {
   ASSERT_NEAR(C.zeta[3], 1.20205690315959, Constants::maxError);
   ASSERT_NEAR(C.zeta[5], 1.03692775514337, Constants::maxError);
+  ASSERT_NEAR(C.zeta[7], 1.00834927738192, Constants::maxError);
 }
 
 TEST(ConstantsTest, Beta) {
@@ -29,6 +30,7 @@ TEST(ConstantsTest, Adler) {
   ASSERT_NEAR(C.c[3][2], -5.6895977110182, Constants::maxError*1000);
   ASSERT_NEAR(C.c[3][3], 1.6875, Constants::maxError);
   ASSERT_NEAR(C.c[3][4], 0., Constants::maxError);
+  ASSERT_NEAR(C.c[4][1], 49.0757000029480, Constants::maxError*1000);
   ASSERT_NEAR(C.c[4][2], -33.0914066167203, Constants::maxError*10000);
   ASSERT_NEAR(C.c[4][3], 15.8015948497910, Constants::maxError*1000);
   ASSERT_NEAR(C.c[4][4], -2.8476562500000, Constants::maxError);

@@ -6,6 +6,7 @@
 #include "Weights.h"
 #include "Constants.h"
 #include "nr3.h"
+#include "theoretical_moment.h"
 
 using namespace std;
 
@@ -17,13 +18,23 @@ double testFunc2(double x) {
   return 3*x*x - 7*x;
 }
 int main(){
-  Experiment E;
-  Constants C(3);
+  Experiment experiment;
 
+  int nf = 3;
+  int nc = 3;
+  int loops = 4;
+
+  Constants constants(nc, nf, loops);
   cout << setprecision(15);
-  cout << "Constant \t" << C.nf << "\t" << C.beta[1] << "\t" << C.c[1][1] << endl;
+
+  TheoreticalMoment theoreticalMoment(constants);
+  cout << "D0(3.) \t" << theoreticalMoment.D0(Constants::sTau) << endl;
+
+  cout << "------------------------------------------------------------" << endl;
+
+  cout << "Constant \t" << constants.nf << "\t" << constants.beta[1] << "\t" << constants.c[1][1] << endl;
   cout << "Experiment SpectralMoment" << endl;
-  cout << "Spec Mom at STAU and WD00" <<  E.SpectralMoment(2.1, Weights::WD00) << endl;
+  cout << "Spec Mom at STAU and WD00" <<  experiment.SpectralMoment(2.1, Weights::WD00) << endl;
   //E.outErrorMatrix(16, 17);
 
 
