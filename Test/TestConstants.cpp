@@ -24,17 +24,20 @@ TEST(ConstantsTest, Adler) {
   ASSERT_NEAR(C.c[1][1], 1., Constants::maxError);
   ASSERT_NEAR(C.c[1][2], 0., Constants::maxError);
   ASSERT_NEAR(C.c[2][1], 1.63982120489698, Constants::maxError*100);
-  ASSERT_NEAR(C.c[2][2], 1.125, Constants::maxError);
+  ASSERT_NEAR(C.c[2][2], -1.125, Constants::maxError);
   ASSERT_NEAR(C.c[2][3], 0., Constants::maxError);
   ASSERT_NEAR(C.c[3][1], 6.37101448310094, Constants::maxError*1000);
   ASSERT_NEAR(C.c[3][2], -5.6895977110182, Constants::maxError*1000);
   ASSERT_NEAR(C.c[3][3], 1.6875, Constants::maxError);
   ASSERT_NEAR(C.c[3][4], 0., Constants::maxError);
-  ASSERT_NEAR(C.c[4][1], 49.0757000029480, Constants::maxError*1000);
+  ASSERT_NEAR(C.c[4][1], 49.0757000029480, Constants::maxError*100000);
   ASSERT_NEAR(C.c[4][2], -33.0914066167203, Constants::maxError*10000);
   ASSERT_NEAR(C.c[4][3], 15.8015948497910, Constants::maxError*1000);
   ASSERT_NEAR(C.c[4][4], -2.8476562500000, Constants::maxError);
   ASSERT_NEAR(C.c[4][5], 0., Constants::maxError);
-
-
+  ASSERT_NEAR(C.c[5][1], 283., Constants::maxError);
+  ASSERT_NEAR(C.c[5][2], -299.177187205152, Constants::maxError*100000);
+  ASSERT_NEAR(C.c[5][3], 129.577532569234, Constants::maxError*10000);
+  ASSERT_NEAR(C.c[5][4], -40.616088412030 , Constants::maxError*1000);
+  ASSERT_NEAR(C.c[5][5], 5.1257812500000 , Constants::maxError);
 }

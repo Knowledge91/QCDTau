@@ -26,9 +26,9 @@ int main(){
 
   Constants constants(nc, nf, loops);
   cout << setprecision(15);
-
+  cout << Constants::kMu << endl;
   TheoreticalMoment theoreticalMoment(constants);
-  cout << "D0(3.) \t" << theoreticalMoment.D0(Constants::sTau) << endl;
+  cout << "cint \t" << theoreticalMoment.spectralMoment(Constants::sTau) << endl;
 
   cout << "------------------------------------------------------------" << endl;
 
