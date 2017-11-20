@@ -1,34 +1,69 @@
-// Numerics.h
-#ifndef NUMERICS_H
-#define NUMERICS_H
+// Copyright 2017 Dirk Hornung
+
+#ifndef PROGRAM_SRC_NUMERICS_H_
+#define PROGRAM_SRC_NUMERICS_H_
 
 #include <cmath>
-#include <vector>
 #include "nr3.h"
 
-using namespace std;
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/lu.hpp>
+#include <boost/numeric/ublas/io.hpp>
+#include <boost/numeric/ublas/vector.hpp>
 
+using namespace std;
 
 // Numerical Operations
 // -> Integration : Gaussian Quadratures
 class Numerics {
-  // Returns weights and abcisas needed for Gaussian Quadratures (Numerics::qgauss)
+  /* Matrix inversion routine.
+     Uses lu_factorize and lu_substitute in uBLAS to invert a matrix
+  */
+  template<class T>
+  static boost::numeric::ublas::matrix<T> InvertMatrix(
+    const boost::numeric::ublas::matrix<T>&input) {
+    using namespace boost::numeric::ublas;
+    typedef permutation_matrix<std::size_t> pmatrix;
+
+    // create a working copy of the input
+    matrix<T> A(input);
+    // create output matrix
+    matrix<T> inverse(input);
+
+    // create a permutation matrix for the LU-factorization
+    matrix<T> pm(A.size1());
+
+    // perform LU-factorization
+      int res = lu_factorize(A, pm);
+      if (res != 0)
+        return false;
+
+      // create identity matrix of "inverse"
+      inverse.assign(identity_matrix<T> (A.size1()));
+
+      // backsubstitute to get the inverse
+      lu_substitute(A, pm, inverse);
+      return inverse;
+    }
+ 
+  // Returns weights and abcisas needed for Gaussian Quadratures
   template <typename T>
-  static void gauleg(const T x1, const T x2, vector<T> &x, vector<T> &w) {
-    const double EPS=1.0e-15;
+    static void gauleg(const T x1, const T x2, std::vector<T> &x,
+                       std::vector<T> &w) {
+    const double EPS = 1.0e-15;
     T z1, z, xm, xl, pp, p3, p2, p1;
     int n = x.size();
     int m = (n+1)/2;
     xm = 0.5*(x2+x1);
     xl = 0.5*(x2-x1);
 
-    for (int i=0; i<m; i++) {
-      z = cos( 3.141592654*(i+0.75)/(n+0.5));
+    for (int i=0; i < m; i++) {
+      z = cos(3.141592654*(i+0.75)/(n+0.5));
 
       do {
         p1 = 1.0;
         p2 = 0.0;
-        for (int j=0; j<n; j++) {
+        for (int j=0; j < n; j++) {
           p3 = p2;
           p2 = p1;
           T jComplx(j);
@@ -42,11 +77,24 @@ class Numerics {
       x[i] = xm-xl*z;
       x[n-1-i] = xm+xl*z;
       w[i] = 2.0*xl/((1.0-z*z)*pp*pp);
-      w[n-1-i]=w[i];
+      w[n-1-i] = w[i];
     }
   }
 
  public:
+  template <class T>
+  static void outputMatrix(boost::numeric::ublas::matrix<T> matrix) {
+    // int rows = matrix.size1()
+    // int cols = matrix.size2()
+    for (int i = 0; i < 2; i++) {
+      for (int j = 0; j < 2; j++) {
+        std::cout << matrix(i, j) << "\t";
+      }
+      std::cout << endl;
+    }
+    std::cout << matrix.size1() << std::endl;
+  }
+  
   // Integration: Gaussian Quadratures
   // Integrates any function from a to b
   template <typename T, typename Func>

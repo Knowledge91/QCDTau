@@ -1,33 +1,52 @@
+// Copyright 2017 Dirk Hornung
+
 #include <iostream>
 #include <cmath>
 #include "CRunDec.h"
 #include "Numerics.h"
-#include "Experiment.h"
+#include "Src/Experiment.h"
 #include "Weights.h"
 #include "Constants.h"
 #include "nr3.h"
 #include "theoretical_moment.h"
+#include "chisquared.h"
 
-using namespace std;
 
 double testFunc(double x) {
+  x = 10;
   return x*x*x + 8*x*x + 23.;
 }
 
 double testFunc2(double x) {
   return 3*x*x - 7*x;
 }
-int main(){
-  Experiment experiment;
 
+
+
+int main() {
+  Experiment experiment;
   int nf = 3;
   int nc = 3;
   int loops = 4;
 
+  int i = 0;
+  while ( i < 10 ) {
+    i++;
+  }
+
   Constants constants(nc, nf, loops);
+      
+  Chisquared chisquared(constants);
+  cout << "CHISQUARED" << endl;
+
+
+  cout << "-----------------------------------------------------------" << endl;
+
+  
   cout << setprecision(15);
   cout << Constants::kMu << endl;
   TheoreticalMoment theoreticalMoment(constants);
+
   cout << "cint \t" << theoreticalMoment.spectralMoment(Constants::sTau) << endl;
 
   cout << "------------------------------------------------------------" << endl;
@@ -39,6 +58,8 @@ int main(){
 
 
   cout << "------------------------------------------------------------" << endl;
+
+
 
   // ------------------------------------------------------------
 

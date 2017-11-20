@@ -32,8 +32,8 @@ class Constants {
     c[5][5] = 1./80.*pow(beta[1],4)*c[1][1];
 
   }
-  double nc; // colour number
-  double nf; // flavour number
+  double nc = 3; // colour number
+  double nf = 3; // flavour number
   double beta[5]; // beta coefficients
   double zeta[8]; // zeta function
   double c[6][6]; // Adler coefficients
