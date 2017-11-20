@@ -4,7 +4,7 @@
 #include <cmath>
 #include "CRunDec.h"
 #include "Numerics.h"
-#include "Src/Experiment.h"
+#include "Src/experimental_moment.h"
 #include "Weights.h"
 #include "Constants.h"
 #include "nr3.h"
@@ -24,7 +24,7 @@ double testFunc2(double x) {
 
 
 int main() {
-  Experiment experiment;
+  ExperimentalMoment experiment;
   int nf = 3;
   int nc = 3;
   int loops = 4;

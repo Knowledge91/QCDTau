@@ -3,15 +3,20 @@
 #ifndef PROGRAM_SRC_NUMERICS_H_
 #define PROGRAM_SRC_NUMERICS_H_
 
+#include <vector>
 #include <cmath>
 #include "nr3.h"
-
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/lu.hpp>
 #include <boost/numeric/ublas/io.hpp>
-#include <boost/numeric/ublas/vector.hpp>
 
-using namespace std;
+
+namespace Ublas {
+
+  using boost::numeric::ublas::matrix;
+  using boost::numeric::ublas::permutation_matrix;
+  using boost::numeric::ublas::identity_matrix;
+  using std::vector;
 
 // Numerical Operations
 // -> Integration : Gaussian Quadratures
@@ -20,9 +25,7 @@ class Numerics {
      Uses lu_factorize and lu_substitute in uBLAS to invert a matrix
   */
   template<class T>
-  static boost::numeric::ublas::matrix<T> InvertMatrix(
-    const boost::numeric::ublas::matrix<T>&input) {
-    using namespace boost::numeric::ublas;
+  static matrix<T> InvertMatrix(const matrix<T>&input) {
     typedef permutation_matrix<std::size_t> pmatrix;
 
     // create a working copy of the input
@@ -83,7 +86,15 @@ class Numerics {
 
  public:
   template <class T>
-  static void outputMatrix(boost::numeric::ublas::matrix<T> matrix) {
+  static void outputVector(vector<T> vector) {
+    for (int i = 0; i < 2; i++) {
+      std::cout << vector[i] << "\t";
+    }
+    std::cout << endl;
+  }
+
+  template <class T>
+  static void outputMatrix(matrix<T> matrix) {
     // int rows = matrix.size1()
     // int cols = matrix.size2()
     for (int i = 0; i < 2; i++) {
@@ -159,4 +170,9 @@ class Numerics {
     gaussj(a,b);
   }
 };
+
+}  // namespace Ublas
+
+using Ublas::Numerics;
+
 #endif

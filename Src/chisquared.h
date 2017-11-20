@@ -4,7 +4,7 @@
 #define PROGRAM_SRC_CHISQUARED_H_
 #include <vector>
 #include "Numerics.h"
-#include "Experiment.h"
+#include "./experimental_moment.h"
 #include "./theoretical_moment.h"
 
 #include "storage_adaptors.hpp"
@@ -17,7 +17,7 @@
 
 class Chisquared {
  public:
-  Chisquared(Constants constants) : constants_(constants), experiment_(Experiment()) {};
+  Chisquared(Constants constants) : constants_(constants), experiment_(ExperimentalMoment()) {};
 
   void build(double s0) {
     MatDoub_IO covarianceMatrix = experiment_.covarianceMatrix;
@@ -28,7 +28,7 @@ class Chisquared {
  private:
   double invertedCovarianceMatrix[80][80];
   Constants constants_;
-  Experiment experiment_;
+  ExperimentalMoment experiment_;
 
   MatDoub_IO invertCovarianceMatrix(MatDoub_IO &covarianceMatrix) {
     MatDoub_IO invertedCovarianceMatrix;

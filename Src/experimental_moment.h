@@ -1,7 +1,7 @@
 // Copyright 2017 Dirk Hornung
 
-#ifndef EXPERIMENT_H
-#define EXPERIMENT_H
+#ifndef PROGRAM_SRC_EXPERIMENTAL_MOMENT_H_
+#define PROGRAM_SRC_EXPERIMENTAL_MOMENT_H_
 
 #include <vector>
 #include "Constants.h"
@@ -23,17 +23,23 @@ extern"C" {
   void aleph_vplusa_(double *sbin, double *dsbin, double *sfm2, double *derr, double (*corerr)[80]);
 }
 
-class Experiment {
+namespace Ublas {
+
+  using boost::numeric::ublas::matrix;
+  using std::vector;
+
+class ExperimentalMoment {
  public:
   MatDoub_IO covarianceMatrix = MatDoub_IO(80, 80);
-  Experiment()  : errorMatrix(80, 80), jacobian(80) {
-    // init Aleph Data
-    aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
-    // init covariant matrix
-    fillErrorMatrix();
-    Numerics::outputMatrix(errorMatrix);
-    fillJacobian(1., W::WTau);
-    fillCovarianceMatrix();
+  ExperimentalMoment()  : errorMatrix(80, 80), jacobian(80) {
+      // init Aleph Data
+      aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
+      // init covariant matrix
+      fillErrorMatrix();
+      // Numerics::outputMatrix(errorMatrix);
+      fillJacobian(1., W::WTau);
+      Numerics::outputVector(jacobian);
+      fillCovarianceMatrix();
   }
 
   // get Spectral-moment for -s0, -weight(x)
@@ -63,7 +69,7 @@ class Experiment {
 
  private:
   double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
-  boost::numeric::ublas::matrix<double> errorMatrix;
+  matrix<double> errorMatrix;
   vector<double> jacobian;
 
   // get last included bin from s0
@@ -110,5 +116,8 @@ class Experiment {
   }
 };
 
-#endif
+}  // namespace Ublas
 
+using Ublas::ExperimentalMoment;
+
+#endif  // PROGRAM_SRC_EXPERIMENTAL_MOMENT_H_
