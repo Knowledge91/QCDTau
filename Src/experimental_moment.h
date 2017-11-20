@@ -27,11 +27,12 @@ namespace Ublas {
 
   using boost::numeric::ublas::matrix;
   using std::vector;
+  using std::cout;
 
 class ExperimentalMoment {
  public:
-  MatDoub_IO covarianceMatrix = MatDoub_IO(80, 80);
-  ExperimentalMoment()  : errorMatrix(80, 80), jacobian(80) {
+  ExperimentalMoment() : errorMatrix(80, 80), covarianceMatrix(80, 80),
+                         jacobian(80) {
       // init Aleph Data
       aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
       // init covariant matrix
@@ -40,6 +41,7 @@ class ExperimentalMoment {
       fillJacobian(1., W::WTau);
       Numerics::outputVector(jacobian);
       fillCovarianceMatrix();
+      Numerics::outputMatrix(covarianceMatrix);
   }
 
   // get Spectral-moment for -s0, -weight(x)
@@ -69,7 +71,7 @@ class ExperimentalMoment {
 
  private:
   double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
-  matrix<double> errorMatrix;
+  matrix<double> errorMatrix, covarianceMatrix;
   vector<double> jacobian;
 
   // get last included bin from s0
@@ -96,8 +98,10 @@ class ExperimentalMoment {
   void fillJacobian(double s0, function<double(double)> weight) {
     for (int i = 0; i < 80; i++) {
       int N = getBinNumber(s0);
-      if (i > N) {
+      if (i < N) {
         jacobian[i] = Constants::sTau/Constants::Be/s0 * wRatio(s0, weight, i);
+      } else {
+        jacobian[i] = 0.;
       }
     }
   }
@@ -105,7 +109,7 @@ class ExperimentalMoment {
   void fillCovarianceMatrix() {
     for (int i = 0; i < 80; i++) {
       for (int j = 0; j < 80; j++) {
-        covarianceMatrix[i][j] = jacobian[i] * errorMatrix(i, j) * jacobian[j];
+        covarianceMatrix(i, j) = jacobian[i] * errorMatrix(i, j) * jacobian[j];
       }
     }
   }

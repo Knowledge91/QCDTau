@@ -34,26 +34,26 @@ int main() {
     i++;
   }
 
-  Constants constants(nc, nf, loops);
+  //  Constants constants(nc, nf, loops);
       
-  Chisquared chisquared(constants);
-  cout << "CHISQUARED" << endl;
+  //  Chisquared chisquared(constants);
+  //  cout << "CHISQUARED" << endl;
 
 
   cout << "-----------------------------------------------------------" << endl;
 
   
-  cout << setprecision(15);
-  cout << Constants::kMu << endl;
-  TheoreticalMoment theoreticalMoment(constants);
+  //  cout << setprecision(15);
+  //  cout << Constants::kMu << endl;
+  //  TheoreticalMoment theoreticalMoment(constants);
 
-  cout << "cint \t" << theoreticalMoment.spectralMoment(Constants::sTau) << endl;
+  //  cout << "cint \t" << theoreticalMoment.spectralMoment(Constants::sTau) << endl;
 
-  cout << "------------------------------------------------------------" << endl;
+  //  cout << "------------------------------------------------------------" << endl;
 
-  cout << "Constant \t" << constants.nf << "\t" << constants.beta[1] << "\t" << constants.c[1][1] << endl;
-  cout << "Experiment SpectralMoment" << endl;
-  cout << "Spec Mom at STAU and WD00" <<  experiment.SpectralMoment(2.1, Weights::WD00) << endl;
+  //  cout << "Constant \t" << constants.nf << "\t" << constants.beta[1] << "\t" << constants.c[1][1] << endl;
+  //  cout << "Experiment SpectralMoment" << endl;
+  //  cout << "Spec Mom at STAU and WD00" <<  experiment.SpectralMoment(2.1, Weights::WD00) << endl;
   //E.outErrorMatrix(16, 17);
 
 

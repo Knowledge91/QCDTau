@@ -87,10 +87,11 @@ class Numerics {
  public:
   template <class T>
   static void outputVector(vector<T> vector) {
+    std::cout << "Output Vector:" << endl;
     for (int i = 0; i < 2; i++) {
       std::cout << vector[i] << "\t";
     }
-    std::cout << endl;
+    std::cout << endl << endl;
   }
 
   template <class T>
