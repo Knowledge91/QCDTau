@@ -24,20 +24,14 @@ double testFunc2(double x) {
 
 
 int main() {
-  ExperimentalMoment experiment;
   int nf = 3;
   int nc = 3;
   int loops = 4;
 
-  int i = 0;
-  while ( i < 10 ) {
-    i++;
-  }
-
-  //  Constants constants(nc, nf, loops);
-      
-  //  Chisquared chisquared(constants);
-  //  cout << "CHISQUARED" << endl;
+  Constants constants(nc, nf, loops);
+  Chisquared chisquared(constants);
+  chisquared.minuit();
+  
 
 
   cout << "-----------------------------------------------------------" << endl;

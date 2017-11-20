@@ -1,4 +1,5 @@
-// Weights.h
+// Copyright 2017 Dirk Hornung
+
 #ifndef WEIGHTS_H
 #define WEIGHTS_H
 

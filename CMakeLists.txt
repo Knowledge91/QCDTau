@@ -4,21 +4,26 @@ cmake_minimum_required (VERSION 3.9.2)
 option(test "Build all tests." OFF) # Makes boolean 'test' available
 
 project (QCDTau CXX Fortran)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_Fortran_COMPILER "/usr/local/bin/gfortran")
 
 find_package(Boost 1.65.1)
-message(STATUS "${Boost_INCLUDE_DIR}" )
+find_package(ROOT REQUIRED COMPONENTS MINUIT)
+# message(STATUS "${ROOT_USE_FILE}" )
+
+# includes somehow the Root header files
+include(${ROOT_USE_FILE})
+
 
 ################################
 # Normal Libraries & Executables
 ################################
-include_directories(SRC Src/Frameworks ${Boost_INCLUDE_DIR} )
+include_directories(SRC Src/Frameworks ${Boost_INCLUDE_DIR})
 add_subdirectory(SRC)
 
 
 add_executable(QCDTau main.cpp)
-target_link_libraries(QCDTau PUBLIC CRunDec ALEPH NR3 ${Boost_LIBRARIES} )
+target_link_libraries(QCDTau PUBLIC CRunDec ALEPH NR3 ${Boost_LIBRARIES} ${ROOT_LIBRARIES} )
 
 ################################
 # Testing

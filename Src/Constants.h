@@ -2,19 +2,23 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <cmath>
 #include <vector>
+
+namespace ConstantsNamespace {
+  using std::pow;
 
 class Constants {
  public:
- Constants(int nc, int nf, int loops) : nc(nc), nf(nf), loops_(loops) {
-    zeta[3] = 1.20205690315959; // coefficients.nb
-    zeta[5] = 1.03692775514337; // coefficients.nb
-    zeta[7] = 1.00834927738192; // coefficients.nb
+  Constants(int nc, int nf, int loops) : nc(nc), nf(nf), loops_(loops) {
+    zeta[3] = 1.20205690315959;  // coefficients.nb
+    zeta[5] = 1.03692775514337;  // coefficients.nb
+    zeta[7] = 1.00834927738192;  // coefficients.nb
 
-    beta[1] = 11./2. - 1./3.*nf; // rgm06
-    beta[2] = 51./4. - 19./12.*nf; // rgm06
-    beta[3] = 2857./64. - 5033./576.*nf + 325./1728.*pow(nf, 2); // rgm06
-    beta[4] = 149753./768. + 891./32.*zeta[3] - (1078361./20736. + 1627./864.*zeta[3])*nf // rgm06
+    beta[1] = 11./2. - 1./3.*nf;  // rgm06
+    beta[2] = 51./4. - 19./12.*nf;  // rgm06
+    beta[3] = 2857./64. - 5033./576.*nf + 325./1728.*pow(nf, 2);  // rgm06
+    beta[4] = 149753./768. + 891./32.*zeta[3] - (1078361./20736. + 1627./864.*zeta[3])*nf  // rgm06
             + (50065./20736. + 809./1296.*zeta[3])*pow(nf,2) + 1093./93312.*pow(nf,3);
 
     c[0][0] = -5./3.; c[0][1] = 1; // rgm06
@@ -53,5 +57,9 @@ class Constants {
 
   static constexpr double maxError = 1e-15; // maximal allowed errro
 };
+
+}  // namespace Contstants
+
+using ConstantsNamespace::Constants;
 
 #endif

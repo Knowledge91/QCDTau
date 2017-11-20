@@ -13,7 +13,7 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 ##############
 # Unit Tests
 ##############
-set(SOURCES TestNumerics.cpp TestConstants.cpp)
+set(SOURCES TestNumerics.cpp TestConstants.cpp test_experimental_moment.cpp)
 
 add_executable(runUnitTests ${SOURCES})
 target_link_libraries(runUnitTests gtest gtest_main NR3 ALEPH CRunDec)
