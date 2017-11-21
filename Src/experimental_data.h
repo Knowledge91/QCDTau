@@ -16,8 +16,8 @@ namespace experimental_data_namespace {
 
 class ExperimentalData {
  public:
-ExperimentalData() : sfm2_(80), sbin_(80), dsbin_(80), derr_(80),
-      corerr_(80, 80) {
+  ExperimentalData() : sfm2_(80), sbin_(80), dsbin_(80), derr_(80),
+      corerr_(80, 80), error_matrix_(80, 80) {
     n_data_points_ = 80;
     double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
     aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
@@ -29,16 +29,15 @@ ExperimentalData() : sfm2_(80), sbin_(80), dsbin_(80), derr_(80),
       derr_[i] = derr[i];
       for (int j = 0; j < n_data_points_; j++) {
         corerr_(i, j) = corerr[i][j];
-      }
+        error_matrix_(i, j) = corerr[i][j]*derr[i]*derr[j]/100.;
+       }
     }
-
-    std::cout << sfm2[1] << std::endl;
   }
 
  private:
   int n_data_points_;
   vector<double> sfm2_, sbin_, dsbin_, derr_;
-  matrix<double> corerr_;
+  matrix<double> error_matrix_, corerr_;
 };
 
 }  // namespace  experimental_data_namespace
