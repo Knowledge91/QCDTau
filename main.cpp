@@ -7,9 +7,8 @@
 #include "Src/experimental_moment.h"
 #include "Weights.h"
 #include "Constants.h"
-#include "nr3.h"
-#include "theoretical_moment.h"
-#include "chisquared.h"
+#include "Src/theoretical_moment.h"
+#include "Src/chisquared.h"
 
 
 double testFunc(double x) {
@@ -29,14 +28,18 @@ int main() {
   int loops = 4;
 
   Constants constants(nc, nf, loops);
-  Chisquared chisquared(constants);
-  chisquared.minuit();
-  
+
+  ExperimentalMoment experiment;
+
+  std::cout << "WRatio(3., WD00, 1) \t"
+            << experiment.wRatio(3., W::WTau, 1) << std::endl;
+
+  //  Chisquared chisquared(constants);
+  //  chisquared.minuit();
 
 
   cout << "-----------------------------------------------------------" << endl;
 
-  
   //  cout << setprecision(15);
   //  cout << Constants::kMu << endl;
   //  TheoreticalMoment theoreticalMoment(constants);

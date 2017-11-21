@@ -4,12 +4,19 @@
 #include "../Src/experimental_moment.h"
 #include "../Src/Weights.h"
 
-const double maxError = 1e-15;
+const double maxError = 1e-13;
 
 typedef ExperimentalMoment E;
 typedef Weights W;
 
+E experiment;
+
+
+TEST(AlephData, Matthias) {
+  ASSERT_NEAR(experiment.sbin[0], 0.03749999999999999, maxError);
+}
+
 TEST(WRatioTest, Matthias) {
-  E experiment;
-  ASSERT_NEAR(experiment.wRatio(3., W::WD00, 1), 1, maxError);
+  ASSERT_NEAR(experiment.wRatio(2.1, W::WD00, 0),
+              0.99930452590445074, maxError);
 }

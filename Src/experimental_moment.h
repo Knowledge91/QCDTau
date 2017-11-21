@@ -39,9 +39,9 @@ class ExperimentalMoment {
       fillErrorMatrix();
       // Numerics::outputMatrix(errorMatrix);
       fillJacobian(1., W::WTau);
-      Numerics::outputVector(jacobian);
+      // Numerics::outputVector(jacobian);
       fillCovarianceMatrix();
-      Numerics::outputMatrix(covarianceMatrix);
+      // Numerics::outputMatrix(covarianceMatrix);
   }
 
   // get Spectral-moment for -s0, -weight(x)
@@ -74,7 +74,6 @@ class ExperimentalMoment {
     return s0/ C::sTau*(weight((sbin[i]-dsbin[i]/2.)/s0)-weight((sbin[i]+dsbin[i]/2.)/s0) )/ (W::WD00((sbin[i]-dsbin[i]/2.)/C::sTau) - W::WD00((sbin[i]+dsbin[i]/2.)/C::sTau));
   }
 
- private:
   double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
   matrix<double> errorMatrix, covarianceMatrix;
   vector<double> jacobian;
