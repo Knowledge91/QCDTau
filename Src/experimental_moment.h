@@ -32,13 +32,18 @@ namespace Ublas {
 class ExperimentalMoment {
  public:
   ExperimentalMoment(double s0, function<double(double)> weight) : s0_(s0),
-      weight_(weight), errorMatrix(80, 80), covarianceMatrix(80, 80),
-      jacobian(80) {
+      weight_(weight), errorMatrix(80, 80),
+      jacobian(80), covarianceMoment_(0) {
     // init Aleph Data
     aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
+    // renoormalisation
+    for (int i = 0; i < 80; i++) {
+      derr[i] *= 0.99363;
+    }
+
     // init covariant matrix
     fillErrorMatrix();
-    // Numerics::outputMatrix(errorMatrix);
+    // Numerics::outputMatrixg(errorMatrix);
     fillJacobian(s0_, weight_);
     // Numerics::outputVector(jacobian);
     fillCovarianceMatrix();
@@ -78,7 +83,8 @@ class ExperimentalMoment {
   double s0_;
   function<double(double)> weight_;
   double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
-  matrix<double> errorMatrix, covarianceMatrix;
+  matrix<double> errorMatrix;
+  double covarianceMoment_;
   vector<double> jacobian;
 
   // get last included bin from s0
@@ -116,12 +122,10 @@ class ExperimentalMoment {
   void fillCovarianceMatrix() {
     for (int i = 0; i < 80; i++) {
       for (int j = 0; j < 80; j++) {
-        covarianceMatrix(i, j) = jacobian[i] * errorMatrix(i, j) * jacobian[j];
+        covarianceMoment_ += jacobian[i] * errorMatrix(i, j) * jacobian[j];
       }
     }
   }
-
-
 };
 
 }  // namespace Ublas
