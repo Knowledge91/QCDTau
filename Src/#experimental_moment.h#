@@ -38,7 +38,7 @@ class ExperimentalMoment {
     aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
     // init covariant matrix
     fillErrorMatrix();
-    // Numerics::outputMatrix(errorMatrix);
+    // Numerics::outputMatrixg(errorMatrix);
     fillJacobian(s0_, weight_);
     // Numerics::outputVector(jacobian);
     fillCovarianceMatrix();

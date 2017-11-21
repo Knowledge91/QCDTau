@@ -5,6 +5,7 @@
 
 #include <vector>
 #include "Numerics.h"
+#include "Weights.h"
 #include "./experimental_moment.h"
 #include "./theoretical_moment.h"
 
@@ -29,6 +30,8 @@ double RosenBrock(const double *xx ) {
 }
 
 
+typedef Weights W;
+
 namespace ROOT::Math {
 
   using boost::numeric::ublas::matrix;
@@ -36,7 +39,7 @@ namespace ROOT::Math {
 class Chisquared {
  public:
   explicit Chisquared(Constants constants) : constants_(constants),
-    experiment_(ExperimentalMoment()) {}
+      experiment_(ExperimentalMoment(3.1570893124000001, W::WD00)) {}
 
   static void minuit() {
     Minimizer* min = Factory::CreateMinimizer("Minuit2", "Migrad");

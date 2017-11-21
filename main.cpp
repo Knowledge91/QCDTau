@@ -5,7 +5,7 @@
 #include "CRunDec.h"
 #include "Numerics.h"
 #include "Src/experimental_moment.h"
-#include "Weights.h"
+#include "Src/Weights.h"
 #include "Constants.h"
 #include "Src/theoretical_moment.h"
 #include "Src/chisquared.h"
@@ -20,6 +20,7 @@ double testFunc2(double x) {
   return 3*x*x - 7*x;
 }
 
+typedef Weights W;
 
 
 int main() {
@@ -29,7 +30,7 @@ int main() {
 
   Constants constants(nc, nf, loops);
 
-  ExperimentalMoment experiment;
+  ExperimentalMoment experiment(3.1570893124000001, W::WTau);
 
   std::cout << "WRatio(3., WD00, 1) \t"
             << experiment.wRatio(3., W::WTau, 1) << std::endl;

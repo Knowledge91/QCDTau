@@ -9,7 +9,7 @@ const double maxError = 1e-13;
 typedef ExperimentalMoment E;
 typedef Weights W;
 
-E experiment;
+E experiment(3.1570893124000001, W::WD00);
 
 
 TEST(AlephData, Matthias) {
