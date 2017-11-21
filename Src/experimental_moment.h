@@ -38,7 +38,7 @@ class ExperimentalMoment {
       // init covariant matrix
       fillErrorMatrix();
       // Numerics::outputMatrix(errorMatrix);
-      fillJacobian(1., W::WTau);
+      fillJacobian(3.1570893124000001, W::WD00);
       // Numerics::outputVector(jacobian);
       fillCovarianceMatrix();
       // Numerics::outputMatrix(covarianceMatrix);

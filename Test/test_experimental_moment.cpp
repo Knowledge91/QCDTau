@@ -20,3 +20,8 @@ TEST(WRatioTest, Matthias) {
   ASSERT_NEAR(experiment.wRatio(2.1, W::WD00, 0),
               0.99930452590445074, maxError);
 }
+
+TEST(Jacobian, Matthias) {
+  ASSERT_NEAR(experiment.jacobian[0],
+              0.056094687833062200, maxError);
+}
