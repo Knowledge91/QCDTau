@@ -19,9 +19,9 @@ typedef Numerics N;
 extern"C" {
   double vphlmntv2_(double *energy, double *vprehadsp, double *vprehadtm, double *vpimhad, double *vprelepsp, double *vpreleptm, double *vpimlep, double *vpretopsp, double *vpretoptm, int *nrflag);
 }
-extern"C" {
-  void aleph_vplusa_(double *sbin, double *dsbin, double *sfm2, double *derr, double (*corerr)[80]);
-}
+//extern"C" {
+//  void aleph_vplusa_(double *sbin, double *dsbin, double *sfm2, double *derr, double //(*corerr)[80]);
+//}
 
 namespace Ublas {
 
@@ -35,7 +35,7 @@ class ExperimentalMoment {
       weight_(weight), errorMatrix(80, 80),
       jacobian(80), covarianceMoment_(0) {
     // init Aleph Data
-    aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
+    // aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
     // renoormalisation
     for (int i = 0; i < 80; i++) {
       derr[i] *= 0.99363;

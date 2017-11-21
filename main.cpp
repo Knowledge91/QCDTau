@@ -9,6 +9,7 @@
 #include "Constants.h"
 #include "Src/theoretical_moment.h"
 #include "Src/chisquared.h"
+#include "Src/experimental_data.h"
 
 
 double testFunc(double x) {
@@ -31,7 +32,8 @@ int main() {
   Constants constants(nc, nf, loops);
 
   ExperimentalMoment experiment(3.1570893124000001, W::WTau);
-
+  ExperimentalData experimental_data;
+  
   std::cout << "WRatio(3., WD00, 1) \t"
             << experiment.wRatio(3., W::WTau, 1) << std::endl;
 
