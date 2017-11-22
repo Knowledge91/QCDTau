@@ -34,6 +34,13 @@ class ExperimentalData {
     }
   }
 
+  vector<double> GetSfm2() const { return sfm2_; }
+  vector<double> GetSbin() const { return sbin_; }
+  vector<double> GetDSbin() const { return dsbin_; }
+  vector<double> GetDErr() const { return derr_; }
+  matrix<double> GetErrorMatrix() const { return error_matrix_; }
+  matrix<double> GetCorrelationMatrix() const { return corerr_; }
+
  private:
   int n_data_points_;
   vector<double> sfm2_, sbin_, dsbin_, derr_;
