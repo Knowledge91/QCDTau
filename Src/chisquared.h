@@ -46,8 +46,11 @@ class Chisquared {
   Chisquared(Constants constants, vector<double> s0Set) : constants_(constants),
       s0_set_(s0Set), jacobian_matrix_(80, 9), covariance_matrix_(9, 9),
       experiment_(ExperimentalMoment(3.1570893124000001, W::WD00)),
-      data_(ExperimentalData()) {
+      data_(ExperimentalData()), inverted_covariance_matrix_(9, 9) {
     FillJacobianMatrix();
+    FillCovarianceMatrix();
+    Numerics::InvertMatrix(covariance_matrix_, inverted_covariance_matrix_);
+    cout << inverted_covariance_matrix_ << endl;
   }
 
   double GetS0SetSize() const { return s0_set_.size(); }
@@ -60,6 +63,22 @@ class Chisquared {
       vector<double> jacobian_vector = experimentalMoment.GetJacobianVector();
       for (int j = 0; j < data_.GetNumberOfDataPoints(); j++) {
         jacobian_matrix_(j, i) = jacobian_vector[j];
+      }
+    }
+  }
+
+  void FillCovarianceMatrix() {
+    function<double(double)> weight = W::WD00;
+    for (int i = 0; i < GetS0SetSize(); i++) {
+      double s0 = s0_set_[i];
+      ExperimentalMoment experimentalMoment(s0, weight);
+      for (int j = 0; j < GetS0SetSize(); j++) {
+        for (int k = 0; k < data_.GetNumberOfDataPoints(); k++) {
+          for (int l = 0; l < data_.GetNumberOfDataPoints(); l++) {
+            covariance_matrix_(i, j) += jacobian_matrix_(k, i)*
+                data_.GetErrorMatrix(k, l)*jacobian_matrix_(l, j);
+          }
+        }
       }
     }
   }
@@ -105,7 +124,7 @@ class Chisquared {
   vector<double> s0_set_;
   matrix<double> jacobian_matrix_;
   matrix<double> covariance_matrix_;
-  double inverted_covariance_matrix[80][80];
+  matrix<double> inverted_covariance_matrix_;
   Constants constants_;
   ExperimentalMoment experiment_;
 };

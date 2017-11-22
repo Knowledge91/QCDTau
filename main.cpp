@@ -25,6 +25,8 @@ typedef Constants C;
 typedef Weights W;
 
 
+
+
 int main() {
   int nf = 3;
   int nc = 3;
