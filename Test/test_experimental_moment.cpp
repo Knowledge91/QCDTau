@@ -17,11 +17,7 @@ TEST(WRatioTest, Matthias) {
 }
 
 TEST(Jacobian, Matthias) {
-  ASSERT_NEAR(experiment.jacobian[0],
+  ASSERT_NEAR(experiment.GetJacobianVector()[0],
               0.056094687833062200, maxError);
 }
 
-TEST(CovariantMoment, Matthias) {
-  ASSERT_NEAR(experiment.covarianceMoment_,
-              9.2174853727193312e-5, maxError);
-}

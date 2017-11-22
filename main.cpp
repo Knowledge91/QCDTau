@@ -21,6 +21,7 @@ double testFunc2(double x) {
   return 3*x*x - 7*x;
 }
 
+typedef Constants C;
 typedef Weights W;
 
 
@@ -34,10 +35,9 @@ int main() {
   ExperimentalMoment experiment(3.1570893124000001, W::WTau);
   ExperimentalData experimental_data;
 
-  std::vector<double> s0Set = {0., 0.5, 1.};
+  std::vector<double> s0Set = {C::sTau, 3., 2.8, 2.6, 2.4, 2.3, 2.2, 2.1, 2.};
   Chisquared chisquared(constants, s0Set);
   chisquared.PrintS0Set();
-  
   //  chisquared.minuit();
 
 

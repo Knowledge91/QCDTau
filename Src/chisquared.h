@@ -45,6 +45,8 @@ class Chisquared {
       s0Set_(s0Set),
       experiment_(ExperimentalMoment(3.1570893124000001, W::WD00)) {}
 
+  double GetS0SetSize() const { return s0Set_.size(); }
+
   void PrintS0Set() {
     cout << "S0Set: " << s0Set_.size() << " points" << endl;
     for (int i = 0; i < s0Set_.size(); i++) {

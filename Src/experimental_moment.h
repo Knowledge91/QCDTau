@@ -26,14 +26,7 @@ namespace Ublas {
 class ExperimentalMoment {
  public:
   ExperimentalMoment(double s0, function<double(double)> weight) : s0_(s0),
-      weight_(weight), data_(ExperimentalData()), jacobian(80),
-      covarianceMoment_(0) {
-    // Numerics::outputMatrixg(errorMatrix);
-    fillJacobian(s0_, weight_);
-    // Numerics::outputVector(jacobian);
-    fillCovarianceMatrix();
-    // Numerics::outputMatrix(covarianceMatrix);
-  }
+      weight_(weight), data_(ExperimentalData()) {}
 
   // get Spectral-moment for -s0, -weight(x)
   double SpectralMoment(const double s0, function<double(double)> weight) {
@@ -58,8 +51,6 @@ class ExperimentalMoment {
 
   double s0_;
   function<double(double)> weight_;
-  vector<double> jacobian;
-  double covarianceMoment_;
   ExperimentalData data_;
 
   // get last included bin from s0
@@ -74,24 +65,17 @@ class ExperimentalMoment {
     return 80;
   }
 
-  void fillJacobian(double s0, function<double(double)> weight) {
+  vector<double> GetJacobianVector() {
+    vector<double> jacobian(80);
     for (int i = 0; i < 80; i++) {
-      int N = getBinNumber(s0);
+      int N = getBinNumber(s0_);
       if (i < N) {
-        jacobian[i] = Constants::sTau/Constants::Be/s0 * wRatio(s0, weight, i);
+        jacobian[i] = Constants::sTau/Constants::Be/s0_*wRatio(s0_, weight_, i);
       } else {
         jacobian[i] = 0.;
       }
     }
-  }
-
-  void fillCovarianceMatrix() {
-    for (int i = 0; i < 80; i++) {
-      for (int j = 0; j < 80; j++) {
-        covarianceMoment_ +=
-            jacobian[i] * data_.GetErrorMatrix(i, j) * jacobian[j];
-      }
-    }
+    return jacobian;
   }
 };
 
