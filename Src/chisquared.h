@@ -8,6 +8,7 @@
 #include "Weights.h"
 #include "./experimental_moment.h"
 #include "./theoretical_moment.h"
+#include "./experimental_data.h"
 
 #include "storage_adaptors.hpp"
 
@@ -38,22 +39,38 @@ namespace ROOT::Math {
   using std::vector;
   using std::cout;
   using std::endl;
+  using std::function;
 
 class Chisquared {
  public:
   Chisquared(Constants constants, vector<double> s0Set) : constants_(constants),
-      s0Set_(s0Set),
-      experiment_(ExperimentalMoment(3.1570893124000001, W::WD00)) {}
+      s0_set_(s0Set), jacobian_matrix_(80, 9), covariance_matrix_(9, 9),
+      experiment_(ExperimentalMoment(3.1570893124000001, W::WD00)),
+      data_(ExperimentalData()) {
+    FillJacobianMatrix();
+  }
 
-  double GetS0SetSize() const { return s0Set_.size(); }
+  double GetS0SetSize() const { return s0_set_.size(); }
+
+  void FillJacobianMatrix() {
+    function<double(double)> weight = W::WD00;
+    for (int i = 0; i < GetS0SetSize(); i++) {
+      double s0 = s0_set_[i];
+      ExperimentalMoment experimentalMoment(s0, weight);
+      vector<double> jacobian_vector = experimentalMoment.GetJacobianVector();
+      for (int j = 0; j < data_.GetNumberOfDataPoints(); j++) {
+        jacobian_matrix_(j, i) = jacobian_vector[j];
+      }
+    }
+  }
 
   void PrintS0Set() {
-    cout << "S0Set: " << s0Set_.size() << " points" << endl;
-    for (int i = 0; i < s0Set_.size(); i++) {
-      cout << "S0(" << i+1 << ") \t" << s0Set_[i] << endl;
+    cout << "S0Set: " << GetS0SetSize() << " points" << endl;
+    for (int i = 0; i < GetS0SetSize(); i++) {
+      cout << "S0(" << i+1 << ") \t" << s0_set_[i] << endl;
     }
-
   }
+
   static void minuit() {
     Minimizer* min = Factory::CreateMinimizer("Minuit2", "Migrad");
 
@@ -84,8 +101,11 @@ class Chisquared {
   }
 
  private:
-  vector<double> s0Set_;
-  double invertedCovarianceMatrix[80][80];
+  ExperimentalData data_;
+  vector<double> s0_set_;
+  matrix<double> jacobian_matrix_;
+  matrix<double> covariance_matrix_;
+  double inverted_covariance_matrix[80][80];
   Constants constants_;
   ExperimentalMoment experiment_;
 };
