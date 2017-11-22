@@ -7,6 +7,7 @@
 #include "Constants.h"
 #include "Weights.h"
 #include "./Numerics.h"
+#include "./experimental_data.h"
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
 
@@ -15,13 +16,6 @@
 typedef Constants C;
 typedef Weights W;
 typedef Numerics N;
-
-extern"C" {
-  double vphlmntv2_(double *energy, double *vprehadsp, double *vprehadtm, double *vpimhad, double *vprelepsp, double *vpreleptm, double *vpimlep, double *vpretopsp, double *vpretoptm, int *nrflag);
-}
-//extern"C" {
-//  void aleph_vplusa_(double *sbin, double *dsbin, double *sfm2, double *derr, double //(*corerr)[80]);
-//}
 
 namespace Ublas {
 
@@ -32,17 +26,8 @@ namespace Ublas {
 class ExperimentalMoment {
  public:
   ExperimentalMoment(double s0, function<double(double)> weight) : s0_(s0),
-      weight_(weight), errorMatrix(80, 80),
-      jacobian(80), covarianceMoment_(0) {
-    // init Aleph Data
-    // aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
-    // renoormalisation
-    for (int i = 0; i < 80; i++) {
-      derr[i] *= 0.99363;
-    }
-
-    // init covariant matrix
-    fillErrorMatrix();
+      weight_(weight), data_(ExperimentalData()), jacobian(80),
+      covarianceMoment_(0) {
     // Numerics::outputMatrixg(errorMatrix);
     fillJacobian(s0_, weight_);
     // Numerics::outputVector(jacobian);
@@ -53,59 +38,40 @@ class ExperimentalMoment {
   // get Spectral-moment for -s0, -weight(x)
   double SpectralMoment(const double s0, function<double(double)> weight) {
     int N = getBinNumber(s0);
-    cout << "s0s \t Nmax : " << s0 << "\t" << N << endl;
-    cout << "s0/sTau \t" << s0/C::sTau << endl;
-    cout << "sbin[0] \t" << sbin[0] << endl;
-    cout << "B \t" << C::Be << endl;
     double sum = 0;
-    for(int i=0; i<=N; i++) {
-
-      //double wRatio = binIntegral(i, weight)/ binIntegral(i, W::WTau);
-      // double wRatio = s0/ C::sTau*(weight((sbin[i]-dsbin[i]/2.)/s0)-weight((sbin[i]+dsbin[i]/2.)/s0) )/ (W::WD00((sbin[i]-dsbin[i]/2.)/C::sTau) - W::WD00((sbin[i]+dsbin[i]/2.)/C::sTau));
-      if (i==0) {
-        cout << "weight \t" << weight((sbin[i]-dsbin[i]/2.)/s0)-weight((sbin[i]+dsbin[i]/2.)/s0)  << endl;
-        cout << "weigthTau \t" << W::WD00((sbin[i]-dsbin[i]/2.)/C::sTau) - W::WD00((sbin[i]+dsbin[i]/2.)/C::sTau) << endl;
-	//        cout << "wRatio \t" << wRatio << endl;
-        cout << "factor \t" << C::sTau/s0/C::Be << endl;
-        cout << "sfm2 \t" << sfm2[i] << endl;
-      }
-
-      sum += wRatio(s0, weight, i)*sfm2[i];
+    for (int i=0; i <= N; i++) {
+      sum += wRatio(s0, weight, i)*data_.GetSfm2(i);
     }
     return C::sTau/s0/C::Be*sum;
   }
 
   template <typename Func>
   double wRatio(double s0, Func weight, int i) {
-    return s0/ C::sTau*(weight((sbin[i]-dsbin[i]/2.)/s0)-weight((sbin[i]+dsbin[i]/2.)/s0) )/ (W::WD00((sbin[i]-dsbin[i]/2.)/C::sTau) - W::WD00((sbin[i]+dsbin[i]/2.)/C::sTau));
+    return
+        s0/ C::sTau*
+        (weight((data_.GetSbin(i)-data_.GetDSbin(i)/2.)/s0)
+         -weight((data_.GetSbin(i)+data_.GetDSbin(i)/2.)/s0) )
+        /
+        (W::WD00((data_.GetSbin(i)-data_.GetDSbin(i)/2.)/C::sTau)
+         - W::WD00((data_.GetSbin(i)+data_.GetDSbin(i)/2.)/C::sTau));
   }
 
   double s0_;
   function<double(double)> weight_;
-  double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
-  matrix<double> errorMatrix;
-  double covarianceMoment_;
   vector<double> jacobian;
+  double covarianceMoment_;
+  ExperimentalData data_;
 
   // get last included bin from s0
   int getBinNumber(double s0) {
     double pos = 0;
     for (int i=0; i < 80; i++) {
-      pos += dsbin[i];
+      pos += data_.GetDSbin(i);
       if (pos >= s0) {
         return i+1;
       }
     }
     return 80;
-  }
-
-  // fill Error Matrix
-  void fillErrorMatrix() {
-    for (int i = 0; i < 80; i++) {
-      for (int j = 0; j < 80; j++) {
-        errorMatrix(i, j) = corerr[i][j]*derr[i]*derr[j]/100.;
-      }
-    }
   }
 
   void fillJacobian(double s0, function<double(double)> weight) {
@@ -122,7 +88,8 @@ class ExperimentalMoment {
   void fillCovarianceMatrix() {
     for (int i = 0; i < 80; i++) {
       for (int j = 0; j < 80; j++) {
-        covarianceMoment_ += jacobian[i] * errorMatrix(i, j) * jacobian[j];
+        covarianceMoment_ +=
+            jacobian[i] * data_.GetErrorMatrix(i, j) * jacobian[j];
       }
     }
   }

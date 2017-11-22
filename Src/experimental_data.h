@@ -6,8 +6,17 @@
 #include <vector>
 #include <boost/numeric/ublas/matrix.hpp>
 
+
+// Access Fortran data provider
 extern"C" {
-  void aleph_vplusa_(double *sbin, double *dsbin, double *sfm2, double *derr, double (*corerr)[80]);
+  void aleph_vplusa_(double *sbin, double *dsbin, double *sfm2,
+                     double *derr, double (*corerr)[80]);
+}
+extern"C" {
+  double vphlmntv2_(double *energy, double *vprehadsp, double *vprehadtm,
+                    double *vpimhad, double *vprelepsp, double *vpreleptm,
+                    double *vpimlep, double *vpretopsp, double *vpretoptm,
+                    int *nrflag);
 }
 
 namespace experimental_data_namespace {
@@ -26,19 +35,20 @@ class ExperimentalData {
       sfm2_[i] = sfm2[i];
       sbin_[i] = sbin[i];
       dsbin_[i] = dsbin[i];
-      derr_[i] = derr[i];
+      // Normalize derr
+      derr_[i] = 0.099363*derr[i];
       for (int j = 0; j < n_data_points_; j++) {
         corerr_(i, j) = corerr[i][j];
-        error_matrix_(i, j) = corerr[i][j]*derr[i]*derr[j]/100.;
+        error_matrix_(i, j) = corerr[i][j]*derr_[i]*derr_[j]/100.;
        }
     }
   }
 
-  vector<double> GetSfm2() const { return sfm2_; }
-  vector<double> GetSbin() const { return sbin_; }
-  vector<double> GetDSbin() const { return dsbin_; }
-  vector<double> GetDErr() const { return derr_; }
-  matrix<double> GetErrorMatrix() const { return error_matrix_; }
+  double GetSfm2(int i) const { return sfm2_[i]; }
+  double GetSbin(int i) const { return sbin_[i]; }
+  double GetDSbin(int i) const { return dsbin_[i]; }
+  double GetDErr(int i) const { return derr_[i]; }
+  double GetErrorMatrix(int i, int j) const { return error_matrix_(i, j); }
   matrix<double> GetCorrelationMatrix() const { return corerr_; }
 
  private:
