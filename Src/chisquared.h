@@ -35,12 +35,23 @@ typedef Weights W;
 namespace ROOT::Math {
 
   using boost::numeric::ublas::matrix;
+  using std::vector;
+  using std::cout;
+  using std::endl;
 
 class Chisquared {
  public:
-  explicit Chisquared(Constants constants) : constants_(constants),
+  Chisquared(Constants constants, vector<double> s0Set) : constants_(constants),
+      s0Set_(s0Set),
       experiment_(ExperimentalMoment(3.1570893124000001, W::WD00)) {}
 
+  void PrintS0Set() {
+    cout << "S0Set: " << s0Set_.size() << " points" << endl;
+    for (int i = 0; i < s0Set_.size(); i++) {
+      cout << "S0(" << i+1 << ") \t" << s0Set_[i] << endl;
+    }
+
+  }
   static void minuit() {
     Minimizer* min = Factory::CreateMinimizer("Minuit2", "Migrad");
 
@@ -71,6 +82,7 @@ class Chisquared {
   }
 
  private:
+  vector<double> s0Set_;
   double invertedCovarianceMatrix[80][80];
   Constants constants_;
   ExperimentalMoment experiment_;

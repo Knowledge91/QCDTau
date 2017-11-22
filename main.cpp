@@ -33,11 +33,11 @@ int main() {
 
   ExperimentalMoment experiment(3.1570893124000001, W::WTau);
   ExperimentalData experimental_data;
-  
-  std::cout << "WRatio(3., WD00, 1) \t"
-            << experiment.wRatio(3., W::WTau, 1) << std::endl;
 
-  //  Chisquared chisquared(constants);
+  std::vector<double> s0Set = {0., 0.5, 1.};
+  Chisquared chisquared(constants, s0Set);
+  chisquared.PrintS0Set();
+  
   //  chisquared.minuit();
 
 
