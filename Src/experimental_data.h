@@ -35,7 +35,7 @@ class ExperimentalData {
       sbin_[i] = sbin[i];
       dsbin_[i] = dsbin[i];
       // Normalize derr
-      derr_[i] = 0.099363*derr[i];
+      derr_[i] = 0.99363*derr[i];
       for (int j = 0; j < GetNumberOfDataPoints(); j++) {
         corerr_(i, j) = corerr[i][j];
         error_matrix_(i, j) = corerr[i][j]*derr_[i]*derr_[j]/100.;

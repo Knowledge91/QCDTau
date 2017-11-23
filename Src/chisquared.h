@@ -10,7 +10,6 @@
 #include "./theoretical_moment.h"
 #include "./experimental_data.h"
 
-#include "storage_adaptors.hpp"
 
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/lu.hpp>
