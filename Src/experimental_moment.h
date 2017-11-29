@@ -12,38 +12,28 @@
 #include <boost/numeric/ublas/io.hpp>
 
 
-typedef Constants C;
-typedef Weights W;
+namespace experimental_moment_wrapper {
+  typedef Constants C;
+  typedef Weights W;
 
+  using std::function;
+  using std::vector;
 
 class ExperimentalMoment {
  public:
-  ExperimentalMoment(double s0, std::function<double(double)> weight);
+  ExperimentalMoment(double s0, function<double(double)> weight);
 
-  // get Spectral-moment for -s0, -weight(x)
-  double GetSpectralMoment() {
-    int N = getBinNumber();
-    double sum = 0;
-    for (int i=0; i <= N; i++) {
-      sum += wRatio(s0_, weight_, i)*data_.GetSfm2(i);
-    }
-    return C::sTau/s0_/C::kBe*sum;
-  }
+  // get Spectral-moment for s0_ and weight_
+  double GetSpectralMoment();
 
-  template <typename Func>
-  double wRatio(double s0, Func weight, int i) {
-    return
-        s0/ C::sTau*
-        (weight((data_.GetSbin(i)-data_.GetDSbin(i)/2.)/s0)
-         -weight((data_.GetSbin(i)+data_.GetDSbin(i)/2.)/s0) )
-        /
-        (W::WD00((data_.GetSbin(i)-data_.GetDSbin(i)/2.)/C::sTau)
-         - W::WD00((data_.GetSbin(i)+data_.GetDSbin(i)/2.)/C::sTau));
-  }
+  // calculates the Jacobian vector for the Gauss-Error-Propagation
+  vector<double> GetJacobianVector();
 
-  double s0_;
-  std::function<double(double)> weight_;
-  ExperimentalData data_;
+ private:
+  // calculates the needed weight_ ratio for the spectral moment
+  //
+  // in general we use as numerator W::WD00 ( weight_ / WD00 )
+  double wRatio(int i);
 
   // get last included bin from s0_
   //
@@ -51,22 +41,12 @@ class ExperimentalMoment {
   // s0_ we need to know when to stop summing.
   int getBinNumber();
 
-  std::vector<double> GetJacobianVector() {
-    std::vector<double> jacobian(82);
-    for (int i = 0; i < 80; i++) {
-      int N = getBinNumber();
-      if (i < N) {
-        jacobian[i] = Constants::sTau/Constants::kBe/s0_
-            *wRatio(s0_, weight_, i);
-      } else {
-        jacobian[i] = 0.;
-      }
-    }
-    jacobian[80] = -GetSpectralMoment() / Constants::kBe;
-    jacobian[81] = -GetSpectralMoment() / Constants::kRtauVex;
-    return jacobian;
-  }
+  double s0_;
+  std::function<double(double)> weight_;
+  ExperimentalData data_;
 };
 
+}  // namespace experimental_moment_wrapper
+using experimental_moment_wrapper::ExperimentalMoment;
 
 #endif  // PROGRAM_SRC_EXPERIMENTAL_MOMENT_H_
