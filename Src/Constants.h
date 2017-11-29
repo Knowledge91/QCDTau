@@ -5,9 +5,6 @@
 #include <cmath>
 #include <vector>
 
-namespace ConstantsNamespace {
-  using std::pow;
-
 class Constants {
  public:
   Constants(int nc, int nf, int loops) : nc(nc), nf(nf), loops_(loops) {
@@ -18,8 +15,10 @@ class Constants {
     beta[1] = 11./2. - 1./3.*nf;  // rgm06
     beta[2] = 51./4. - 19./12.*nf;  // rgm06
     beta[3] = 2857./64. - 5033./576.*nf + 325./1728.*pow(nf, 2);  // rgm06
-    beta[4] = 149753./768. + 891./32.*zeta[3] - (1078361./20736. + 1627./864.*zeta[3])*nf  // rgm06
-            + (50065./20736. + 809./1296.*zeta[3])*pow(nf,2) + 1093./93312.*pow(nf,3);
+    beta[4] = 149753./768. + 891./32.*zeta[3]  // rgm06
+        -(1078361./20736. + 1627./864.*zeta[3])*nf
+        + (50065./20736. + 809./1296.*zeta[3])*pow(nf, 2)
+        + 1093./93312.*pow(nf, 3);
 
     c[0][0] = -5./3.; c[0][1] = 1; // rgm06
     c[1][1] = 1.; c[1][2] = 0.; // rgm06
@@ -50,16 +49,28 @@ class Constants {
   static constexpr double kSTau = 3.1570893124; //mTau*mTau;
 
 
-  static constexpr double sTau = 3.1570893124; //mTau*mTau;
-  static constexpr double Be = 17.827; // HFAG 2011
+  static constexpr double sTau = 3.1570893124;  // mTau*mTau;
+  static constexpr double kBe = 17.827;         // HFAG 2011
+  static constexpr double kDBe = 0.04;          // HFAG 2011
+  static constexpr double kRtauVex = 1.;
+  static constexpr double kDRtauVex = 0.;
   static constexpr double mu2 = 1.;
-  static constexpr double mTau = 1.77686; // PDG 2016
+  static constexpr double mTau = 1.77686;       // PDG 2016
 
-  static constexpr double maxError = 1e-15; // maximal allowed errro
+  static constexpr double Vud = 0.97425;        // Towner, Hardy 2009
+  static constexpr double dVud = 0.00022;
+  static constexpr double SEW = 1.0198;         // EW radiative corr.
+  static constexpr double dSEW = 0.006;
+
+  // Pseudoscalar resonance parameter
+  static constexpr double fpi = 92.21e-3;       // PDG 2010
+  static constexpr double dfpi = 0.14e-3;       // PDG 2010
+
+  // Pi-Pole
+  static double pifac;
+  static double dpifac;
+
+  static constexpr double maxError = 1e-15;
 };
 
-}  // namespace Contstants
-
-using ConstantsNamespace::Constants;
-
-#endif
+#endif  // PROGRAM_SRC_CONSTANTS_H_

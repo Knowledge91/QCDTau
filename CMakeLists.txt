@@ -18,11 +18,12 @@ include(${ROOT_USE_FILE})
 ################################
 # Normal Libraries & Executables
 ################################
-include_directories(SRC Src/Frameworks ${Boost_INCLUDE_DIR})
+include_directories(SRC src/Frameworks ${Boost_INCLUDE_DIR})
 add_subdirectory(SRC)
 
+file(GLOB SOURCES src/*.cpp)
 
-add_executable(QCDTau main.cpp)
+add_executable(QCDTau main.cpp ${SOURCES})
 target_link_libraries(QCDTau PUBLIC CRunDec ALEPH NR3 ${Boost_LIBRARIES} ${ROOT_LIBRARIES} )
 
 ################################

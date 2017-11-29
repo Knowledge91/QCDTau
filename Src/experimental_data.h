@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <boost/numeric/ublas/matrix.hpp>
+#include "./constants.h"
 
 
 // Access Fortran data provider
@@ -19,29 +20,11 @@ extern"C" {
                     int *nrflag);
 }
 
-namespace experimental_data_namespace {
-  using std::vector;
-  using boost::numeric::ublas::matrix;
-
 class ExperimentalData {
  public:
-  ExperimentalData() : sfm2_(80), sbin_(80), dsbin_(80), derr_(80),
-      corerr_(80, 80), error_matrix_(80, 80) {
-    double sbin[80], dsbin[80], sfm2[80], derr[80], corerr[80][80];
-    aleph_vplusa_(sbin, dsbin, sfm2, derr, corerr);
-    sfm2_.resize(80);
-    for (int i = 0; i < GetNumberOfDataPoints(); i++) {
-      sfm2_[i] = sfm2[i];
-      sbin_[i] = sbin[i];
-      dsbin_[i] = dsbin[i];
-      // Normalize derr
-      derr_[i] = 0.99363*derr[i];
-      for (int j = 0; j < GetNumberOfDataPoints(); j++) {
-        corerr_(i, j) = corerr[i][j];
-        error_matrix_(i, j) = corerr[i][j]*derr_[i]*derr_[j]/100.;
-       }
-    }
-  }
+  ExperimentalData();
+
+  void test();
 
   int GetNumberOfDataPoints() const { return sfm2_.size(); }
 
@@ -50,15 +33,15 @@ class ExperimentalData {
   double GetDSbin(int i) const { return dsbin_[i]; }
   double GetDErr(int i) const { return derr_[i]; }
   double GetErrorMatrix(int i, int j) const { return error_matrix_(i, j); }
-  matrix<double> GetCorrelationMatrix() const { return corerr_; }
+  boost::numeric::ublas::matrix<double> GetCorrelationMatrix() const {
+    return corerr_;
+  }
 
  private:
-  vector<double> sfm2_, sbin_, dsbin_, derr_;
-  matrix<double> error_matrix_, corerr_;
+  std::vector<double> sfm2_, sbin_, dsbin_, derr_;
+  boost::numeric::ublas::matrix<double> error_matrix_, corerr_;
 };
 
-}  // namespace  experimental_data_namespace
 
-using experimental_data_namespace::ExperimentalData;
 
 #endif  // PROGRAM_SRC_EXPERIMENTAL_DATA_H_

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <cmath>
-#include "Constants.h"
+#include "../src/constants.h"
 
 
 // Tests for nf = 3

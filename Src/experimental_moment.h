@@ -4,38 +4,30 @@
 #define PROGRAM_SRC_EXPERIMENTAL_MOMENT_H_
 
 #include <vector>
-#include "Constants.h"
-#include "Weights.h"
-#include "./Numerics.h"
+#include <functional>
+#include "./constants.h"
+#include "./weights.h"
 #include "./experimental_data.h"
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
 
 
-
 typedef Constants C;
 typedef Weights W;
-typedef Numerics N;
 
-namespace Ublas {
-
-  using boost::numeric::ublas::matrix;
-  using std::vector;
-  using std::cout;
 
 class ExperimentalMoment {
  public:
-  ExperimentalMoment(double s0, function<double(double)> weight) : s0_(s0),
-      weight_(weight), data_(ExperimentalData()) {}
+  ExperimentalMoment(double s0, std::function<double(double)> weight);
 
   // get Spectral-moment for -s0, -weight(x)
-  double SpectralMoment(const double s0, function<double(double)> weight) {
-    int N = getBinNumber(s0);
+  double GetSpectralMoment() {
+    int N = getBinNumber();
     double sum = 0;
     for (int i=0; i <= N; i++) {
-      sum += wRatio(s0, weight, i)*data_.GetSfm2(i);
+      sum += wRatio(s0_, weight_, i)*data_.GetSfm2(i);
     }
-    return C::sTau/s0/C::Be*sum;
+    return C::sTau/s0_/C::kBe*sum;
   }
 
   template <typename Func>
@@ -50,37 +42,31 @@ class ExperimentalMoment {
   }
 
   double s0_;
-  function<double(double)> weight_;
+  std::function<double(double)> weight_;
   ExperimentalData data_;
 
-  // get last included bin from s0
-  int getBinNumber(double s0) {
-    double pos = 0;
-    for (int i=0; i < 80; i++) {
-      pos += data_.GetDSbin(i);
-      if (pos >= s0) {
-        return i+1;
-      }
-    }
-    return 80;
-  }
+  // get last included bin from s0_
+  //
+  // The experimental data is discrete. As we are summing over the data until
+  // s0_ we need to know when to stop summing.
+  int getBinNumber();
 
-  vector<double> GetJacobianVector() {
-    vector<double> jacobian(80);
+  std::vector<double> GetJacobianVector() {
+    std::vector<double> jacobian(82);
     for (int i = 0; i < 80; i++) {
-      int N = getBinNumber(s0_);
+      int N = getBinNumber();
       if (i < N) {
-        jacobian[i] = Constants::sTau/Constants::Be/s0_*wRatio(s0_, weight_, i);
+        jacobian[i] = Constants::sTau/Constants::kBe/s0_
+            *wRatio(s0_, weight_, i);
       } else {
         jacobian[i] = 0.;
       }
     }
+    jacobian[80] = -GetSpectralMoment() / Constants::kBe;
+    jacobian[81] = -GetSpectralMoment() / Constants::kRtauVex;
     return jacobian;
   }
 };
 
-}  // namespace Ublas
-
-using Ublas::ExperimentalMoment;
 
 #endif  // PROGRAM_SRC_EXPERIMENTAL_MOMENT_H_

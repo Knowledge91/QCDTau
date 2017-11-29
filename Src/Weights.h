@@ -3,7 +3,7 @@
 #ifndef WEIGHTS_H
 #define WEIGHTS_H
 
-#include "Constants.h"
+#include "./constants.h"
 
 typedef Constants C;
 

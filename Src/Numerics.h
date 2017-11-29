@@ -88,11 +88,11 @@ class Numerics {
  public:
   template <class T>
   static void outputVector(vector<T> vector) {
-    std::cout << "Output Vector:" << endl;
+    std::cout << "Output Vector:" << std::endl;
     for (int i = 0; i < 2; i++) {
       std::cout << vector[i] << "\t";
     }
-    std::cout << endl << endl;
+    std::cout << std::endl << std::endl;
   }
 
   template <class T>
@@ -103,7 +103,7 @@ class Numerics {
       for (int j = 0; j < 2; j++) {
         std::cout << matrix(i, j) << "\t";
       }
-      std::cout << endl;
+      std::cout << std::endl;
     }
     std::cout << matrix.size1() << std::endl;
   }
