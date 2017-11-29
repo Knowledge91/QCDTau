@@ -13,7 +13,7 @@
 class TheoreticalMoment {
  public:
   TheoreticalMoment(Constants constants) : constants_(constants) {
-    c_run_dec_ = new CRunDec(constants.nf);
+    c_run_dec_ = new CRunDec(constants.getNf());
   };
 
   std::complex<double> spectralMoment(double s0) {
@@ -34,10 +34,10 @@ class TheoreticalMoment {
     double amu = alphaMu(pow(Constants::kMu, 2));
     for (int n=1; n<=5; n++) {
       for (int k=1; k<=n; k++) {
-        sum += k*pow(amu, n)*constants_.c[n][k]*pow(l(s, Constants::kMu), k-1);
+        sum += k*pow(amu, n)*constants_.getC(n, k)*pow(l(s, Constants::kMu), k-1);
       }
     }
-    std::complex<double> d0 = constants_.nc/12./pow(M_PI, 2)*(constants_.c[0][1] + sum);
+    std::complex<double> d0 = constants_.getNc()/12./pow(M_PI, 2)*(constants_.getC(0, 1) + sum);
     if (first) {
       first = false;
       std::cout << std::endl;
@@ -49,7 +49,7 @@ class TheoreticalMoment {
       std::cout << std::endl;
       for (int n=0; n<=5; n++) {
         for (int k=1; k<=n; k++) {
-          std::cout << "c(" << n << "," << k << ") \t" << constants_.c[n][k] <<
+          std::cout << "c(" << n << "," << k << ") \t" << constants_.getC(n, k) <<
               std::endl;
         }
       }

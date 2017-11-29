@@ -10,12 +10,6 @@
 typedef Constants C;
 
 int main() {
-  int nf = 3;
-  int nc = 3;
-  int loops = 4;
-
-  Constants constants(nc, nf, loops);
-
   std::cout << Constants::dpifac << std::endl;
 
   return(0);
