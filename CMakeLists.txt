@@ -30,5 +30,5 @@ target_link_libraries(QCDTau PUBLIC CRunDec ALEPH NR3 ${Boost_LIBRARIES} ${ROOT_
 # Testing
 ################################
 if(test)
-    add_subdirectory(Test)
+    add_subdirectory(test)
 endif()

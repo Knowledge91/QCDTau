@@ -12,6 +12,8 @@ class Constants {
 
   int getNf() { return nf_; }
   int getNc() { return nc_; }
+  double getZeta(int i) { return zeta_[i]; }
+  double getBeta(int i) { return beta_[i]; }
   double getC(int i, int j) { return c_[i][j]; }
 
   const double kAlphaSMz = 0.1181;  // PDG 2016 p.145

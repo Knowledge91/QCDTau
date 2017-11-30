@@ -20,9 +20,5 @@ ExperimentalData::ExperimentalData() : sfm2_(80), sbin_(80), dsbin_(80),
      }
   }
   error_matrix_(80, 80) = pow(Constants::kDBe, 2);
-  error_matrix_(81, 81) = 1.;
-}
-
-void ExperimentalData::test() {
-  std::cout << Constants::dpifac << std::endl;
+  error_matrix_(81, 81) = pow(Constants::dpifac, 2);
 }

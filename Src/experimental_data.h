@@ -24,8 +24,6 @@ class ExperimentalData {
  public:
   ExperimentalData();
 
-  void test();
-
   int GetNumberOfDataPoints() const { return sfm2_.size(); }
 
   double GetSfm2(int i) const { return sfm2_[i]; }
