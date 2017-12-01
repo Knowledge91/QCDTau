@@ -42,9 +42,9 @@ Constants::Constants(int nc, int nf, int loops) :
   c_[5][5] = 1./80.*pow(beta_[1], 4)*c_[1][1];
 }
 
-double Constants::pifac = 24.*pow(M_PI*Vud*fpi, 2)*SEW;
-double Constants::dpifac = pifac*sqrt(4.*pow(dVud/Vud, 2)
-                                      +pow(dSEW/SEW, 2)+4.*pow(dfpi/fpi, 2));
+double Constants::pifac = 24.*std::pow(M_PI*Vud*fpi, 2.)*SEW;
+double Constants::dpifac = Constants::pifac*std::sqrt(4.*std::pow(dVud/Vud, 2)
+                         + std::pow(dSEW/SEW, 2)+4.*std::pow(dfpi/fpi, 2));
 
 
 

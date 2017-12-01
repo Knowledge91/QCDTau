@@ -33,7 +33,7 @@ class Constants {
   static constexpr double Vud = 0.97425;        // Towner, Hardy 2009
   static constexpr double dVud = 0.00022;
   static constexpr double SEW = 1.0198;         // EW radiative corr.
-  static constexpr double dSEW = 0.006;
+  static constexpr double dSEW = 0.0006;
 
   // Pseudoscalar resonance parameter
   static constexpr double fpi = 92.21e-3;       // PDG 2010
