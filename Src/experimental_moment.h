@@ -26,10 +26,11 @@ class ExperimentalMoment {
   // get Spectral-moment for s0_ and weight_
   double GetSpectralMoment();
 
+  double GetPiMoment();
+
   // calculates the Jacobian vector for the Gauss-Error-Propagation
   vector<double> GetJacobianVector();
 
- private:
   // calculates the needed weight_ ratio for the spectral moment
   //
   // in general we use as numerator W::WD00 ( weight_ / WD00 )

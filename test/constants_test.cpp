@@ -50,6 +50,9 @@ TEST_F(ConstantsTest, Adler) {
 }
 
 TEST_F(ConstantsTest, various) {
+  ASSERT_NEAR(C::sTau, 3.1570893124000001, C::maxError);
+  ASSERT_NEAR(C::Be, 17.827, C::maxError);
+
   ASSERT_NEAR(C::Vud, 0.97425, C::maxError);
   ASSERT_NEAR(C::dVud, 0.00022, C::maxError);
   ASSERT_NEAR(C::fpi, 92.21e-3, C::maxError);

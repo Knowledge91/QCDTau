@@ -23,7 +23,7 @@ class Constants {
   static constexpr double kSTau = 3.1570893124;  // mTau*mTau;
 
   static constexpr double sTau = 3.1570893124;  // mTau*mTau;
-  static constexpr double kBe = 17.827;         // HFAG 2011
+  static constexpr double Be = 17.827;         // HFAG 2011
   static constexpr double kDBe = 0.04;          // HFAG 2011
   static constexpr double kRtauVex = 1.;
   static constexpr double kDRtauVex = 0.;
@@ -38,6 +38,9 @@ class Constants {
   // Pseudoscalar resonance parameter
   static constexpr double fpi = 92.21e-3;       // PDG 2010
   static constexpr double dfpi = 0.14e-3;       // PDG 2010
+
+  // particle masses
+  static constexpr double mpim = 0.13957018;    // M_pi^-
 
   // Pi-Pole
   static double pifac;
