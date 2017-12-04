@@ -4,7 +4,11 @@
 #include <cmath>
 #include "CRunDec.h"
 #include "Numerics.h"
-#include "./constants.h"
+#include "src/constants.h"
+#include "src/weights.h"
+#include "src/experimental_moment.h"
+
+typedef Weights W;
 
 using std::cout;
 using std::endl;
@@ -13,10 +17,10 @@ typedef Constants C;
 
 int main() {
   std::cout << std::setprecision(15);
-  cout << C::pifac << endl;
-  cout << M_PI << endl;
-  cout << C::dpifac << endl;
-  cout << 4.*std::pow(C::dVud/C::Vud, 2) + std::pow(C::dSEW/C::SEW, 2)+4.*std::pow(C::dfpi/C::fpi, 2) << endl;
+
+  ExperimentalMoment experimental_moment(2.1, W::WD00);
+  cout << experimental_moment.GetSpectralMoment() - 47.033957394180902 << endl;
+  cout << C::sTau/2.1/C::Be - 8.4331399733416662e-2 << endl;
 
   return(0);
 }

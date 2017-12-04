@@ -40,7 +40,7 @@ class ExperimentalMoment {
   //
   // The experimental data is discrete. As we are summing over the data until
   // s0_ we need to know when to stop summing.
-  int getBinNumber();
+  int GetBinNumber();
 
   double s0_;
   std::function<double(double)> weight_;

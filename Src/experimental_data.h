@@ -27,9 +27,11 @@ class ExperimentalData {
   int GetNumberOfDataPoints() const { return sfm2_.size(); }
 
   double GetSfm2(int i) const { return sfm2_[i]; }
+  double GetScaledSfm2(int i) const { return sfm2_[i]*0.99363; }
   double GetSbin(int i) const { return sbin_[i]; }
   double GetDSbin(int i) const { return dsbin_[i]; }
   double GetDErr(int i) const { return derr_[i]; }
+  double GetScaledDErr(int i) const { return derr_[i]*0.99363; }
   double GetErrorMatrix(int i, int j) const { return error_matrix_(i, j); }
   boost::numeric::ublas::matrix<double> GetCorrelationMatrix() const {
     return corerr_;
