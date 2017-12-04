@@ -31,6 +31,8 @@ class ExperimentalMoment {
   // calculates the Jacobian vector for the Gauss-Error-Propagation
   vector<double> GetJacobianVector();
 
+  
+
   // calculates the needed weight_ ratio for the spectral moment
   //
   // in general we use as numerator W::WD00 ( weight_ / WD00 )

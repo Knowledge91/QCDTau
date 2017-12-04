@@ -16,8 +16,8 @@ class Constants {
   double getBeta(int i) { return beta_[i]; }
   double getC(int i, int j) { return c_[i][j]; }
 
-  const double kAlphaSMz = 0.1181;  // PDG 2016 p.145
-  const double kMz = 91.1876;  // PDG 2016 p.29
+  static constexpr double kAlphaSMz = 0.1181;  // PDG 2016 p.145
+  static constexpr double kMz = 91.1876;  // PDG 2016 p.29
   static constexpr double kMu = 1.77682;  // sqrt(sTau)
   static constexpr double kAlphaSTau = 0.31927;
   static constexpr double kSTau = 3.1570893124;  // mTau*mTau;

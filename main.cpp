@@ -8,12 +8,13 @@
 #include "src/weights.h"
 #include "src/experimental_moment.h"
 
+typedef Constants C;
 typedef Weights W;
+
+
 
 using std::cout;
 using std::endl;
-
-typedef Constants C;
 
 int main() {
   std::cout << std::setprecision(15);
