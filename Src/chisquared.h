@@ -4,7 +4,7 @@
 #define PROGRAM_SRC_CHISQUARED_H_
 
 #include <vector>
-#include "Numerics.h"
+#include "./numerics.h"
 #include "./weights.h"
 #include "./experimental_moment.h"
 #include "./theoretical_moment.h"
@@ -29,6 +29,14 @@ class Chisquared {
   Chisquared(Constants constants, std::vector<double> s0Set);
 
   double GetS0SetSize() const { return s0_set_.size(); }
+
+  double GetJacobianMatrix(int i, int j) const {
+    return jacobian_matrix_(i, j);
+  }
+
+  double GetCovarianceMatrix(int i, int j) const {
+    return covariance_matrix_(i, j);
+  }
 
   double GetInvertedCovarianceMatrix(int i, int j) const {
     return inverted_covariance_matrix_(i, j);

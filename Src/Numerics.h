@@ -22,7 +22,19 @@ namespace Ublas {
 // -> Integration : Gaussian Quadratures
 class Numerics {
  public:
-  
+  template <class Iter>
+  double kahan_summation(Iter begin, Iter end) {
+    double result = 0.;
+
+    double c = 0.;
+    for (; begin != end; ++begin) {
+      double y = *begin - c;
+      double t = result + y;
+      c = (t - result) - y;
+      result = t;
+    }
+    return result;
+  }
 
   /* Matrix inversion routine.
   Uses lu_factorize and lu_substitute in uBLAS to invert a matrix */

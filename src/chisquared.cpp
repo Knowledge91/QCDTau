@@ -86,8 +86,8 @@ void Chisquared::FillCovarianceMatrix() {
     double s0 = s0_set_[i];
     ExperimentalMoment experimentalMoment(s0, weight);
     for (int j = 0; j < GetS0SetSize(); j++) {
-      for (int k = 0; k < data_.GetNumberOfDataPoints()+2; k++) {
-        for (int l = 0; l < data_.GetNumberOfDataPoints()+2; l++) {
+      for (int k = 0; k < data_.GetNumberOfDataPoints(); k++) {
+        for (int l = 0; l < data_.GetNumberOfDataPoints(); l++) {
           covariance_matrix_(i, j) += jacobian_matrix_(k, i)*
               data_.GetErrorMatrix(k, l)*jacobian_matrix_(l, j);
         }

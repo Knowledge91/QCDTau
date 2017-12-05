@@ -37,6 +37,10 @@ class ExperimentalData {
     return corerr_;
   }
 
+  void FillErrorMatrix();
+
+  void PrintDErr();
+
  private:
   std::vector<double> sfm2_, sbin_, dsbin_, derr_;
   boost::numeric::ublas::matrix<double> error_matrix_, corerr_;

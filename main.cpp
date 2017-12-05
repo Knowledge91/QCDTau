@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include "CRunDec.h"
-#include "Numerics.h"
+#include "src/numerics.h"
 #include "src/constants.h"
 #include "src/weights.h"
 #include "src/experimental_moment.h"

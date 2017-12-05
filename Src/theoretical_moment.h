@@ -3,11 +3,10 @@
 #define THEORETICALMOMENT_H
 
 #include "./constants.h"
-#include "Numerics.h"
+#include "./numerics.h"
 #include <cmath>
 #include "CRunDec.h"
 #include <complex>
-#include "Numerics.h"
 
 
 class TheoreticalMoment {

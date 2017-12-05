@@ -14,9 +14,9 @@ ExperimentalMoment::ExperimentalMoment(
 double ExperimentalMoment::GetSpectralMoment() {
   double sum = 0;
   for (int i=0; i <= GetBinNumber(); i++) {
-    sum += C::sTau/s0_/C::Be*wRatio(i)*data_.GetScaledSfm2(i);
+    sum += wRatio(i)*data_.GetScaledSfm2(i);
   }
-  return sum + GetPiMoment();
+  return C::sTau/s0_/C::Be*sum + GetPiMoment();
 }
 
 double ExperimentalMoment::GetPiMoment() {
@@ -42,7 +42,7 @@ vector<double> ExperimentalMoment::GetJacobianVector() {
   for (int i = 0; i < 80; i++) {
     int N = GetBinNumber();
     if (i < N) {
-      jacobian[i] = Constants::sTau/Constants::Be/s0_
+      jacobian[i] = Constants::sTau/(Constants::Be*s0_)
           *wRatio(i);
     } else {
       jacobian[i] = 0.;
