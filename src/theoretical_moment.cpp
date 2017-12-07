@@ -11,7 +11,7 @@ dComplex TheoreticalMoment::GetSpectralMoment(double s0) {
       return s0*exp(i*phi);
     };
   auto d0Gamma = [s0, this, gamma] (dComplex x) {
-    return D0(gamma(x));
+    return GetD0(gamma(x));
   };
 
   dComplex contourIntegral =
@@ -22,11 +22,11 @@ dComplex TheoreticalMoment::GetSpectralMoment(double s0) {
 
 dComplex TheoreticalMoment::GetD0(dComplex s) {
   dComplex sum = 0;
-  double amu = alphaMu(pow(Constants::kMu, 2));
+  double amu = GetAlphaMu(pow(Constants::kMu, 2));
   for (int n=1; n <= 5; n++) {
     for (int k=1; k <= n; k++) {
       sum += k*pow(amu, n)*constants_.getC(n, k)
-          *pow(l(s, Constants::kMu), k-1);
+          *pow(GetL(s, Constants::kMu), k-1);
     }
   }
   dComplex d0 = constants_.getNc()/12./pow(M_PI, 2)
@@ -46,7 +46,7 @@ dComplex TheoreticalMoment::GetL(dComplex s, double mu) {
   return result;
 }
 
-dComplex TheoreticalMoment::GetAlphaMu(double mu)  {
+double TheoreticalMoment::GetAlphaMu(double mu)  {
   double alpha_s = c_run_dec_ -> AlphasExact(Constants::kAlphaSTau/M_PI,
                                              Constants::kSTau, mu, 3);
   return alpha_s/M_PI;
