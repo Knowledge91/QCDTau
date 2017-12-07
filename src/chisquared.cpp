@@ -25,10 +25,19 @@ Chisquared::Chisquared(Constants constants, vector<double> s0Set) :
     constants_(constants), s0_set_(s0Set), jacobian_matrix_(82, 9),
     covariance_matrix_(9, 9), data_(ExperimentalData()),
     experiment_(ExperimentalMoment(3.1570893124000001, W::WD00)),
-    inverted_covariance_matrix_(9, 9) {
+    inverse_covariance_matrix_(9, 9) {
   FillJacobianMatrix();
   FillCovarianceMatrix();
-  Numerics::InvertMatrix(covariance_matrix_, inverted_covariance_matrix_);
+
+  // remove correlations with R_tau, V+A in Aleph fit
+  for (int i = 0; i < 9; i++) {
+    covariance_matrix_(1, i) = 0.;
+    covariance_matrix_(i, 1) = 0.;
+  }
+
+  cout << covariance_matrix_ << endl;
+  Numerics::InvertMatrix(covariance_matrix_, inverse_covariance_matrix_);
+  cout << inverse_covariance_matrix_ << endl;
 }
 
 void Chisquared::Minuit() {
@@ -74,20 +83,17 @@ void Chisquared::FillJacobianMatrix() {
     ExperimentalMoment experimentalMoment(s0, weight);
     vector<double> jacobian_vector =
         experimentalMoment.GetJacobianVector();
-    for (int j = 0; j < data_.GetNumberOfDataPoints(); j++) {
+    for (int j = 0; j < data_.GetNumberOfDataPoints()+2; j++) {
       jacobian_matrix_(j, i) = jacobian_vector[j];
     }
   }
 }
 
 void Chisquared::FillCovarianceMatrix() {
-  function<double(double)> weight = W::WD00;
   for (int i = 0; i < GetS0SetSize(); i++) {
-    double s0 = s0_set_[i];
-    ExperimentalMoment experimentalMoment(s0, weight);
     for (int j = 0; j < GetS0SetSize(); j++) {
-      for (int k = 0; k < data_.GetNumberOfDataPoints(); k++) {
-        for (int l = 0; l < data_.GetNumberOfDataPoints(); l++) {
+      for (int k = 0; k < data_.GetNumberOfDataPoints()+2; k++) {
+        for (int l = 0; l < data_.GetNumberOfDataPoints()+2; l++) {
           covariance_matrix_(i, j) += jacobian_matrix_(k, i)*
               data_.GetErrorMatrix(k, l)*jacobian_matrix_(l, j);
         }

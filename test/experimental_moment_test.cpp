@@ -17,8 +17,9 @@ class ExperimentalMomentTest : public ::testing::Test {
 };
 
 TEST_F(ExperimentalMomentTest, WRatio) {
-  ASSERT_NEAR(experimental_moment_.wRatio(0),
-              0.99930452590445074, C::maxError);
+  ASSERT_DOUBLE_EQ(experimental_moment_.wRatio(0), 0.99930452590445074);
+  ASSERT_NEAR(experimental_moment2_.wRatio(5), 0.98125247104896496,
+              C::maxError*1e1);
 }
 
 TEST_F(ExperimentalMomentTest, BinNumber) {

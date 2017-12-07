@@ -6,10 +6,12 @@
 #include <vector>
 #include <cmath>
 #include "nr3.h"
+#include "./constants.h"
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/lu.hpp>
 #include <boost/numeric/ublas/io.hpp>
 
+typedef Constants C;
 
 namespace Ublas {
 

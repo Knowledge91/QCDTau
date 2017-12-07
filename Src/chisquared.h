@@ -38,8 +38,8 @@ class Chisquared {
     return covariance_matrix_(i, j);
   }
 
-  double GetInvertedCovarianceMatrix(int i, int j) const {
-    return inverted_covariance_matrix_(i, j);
+  double GetInverseCovarianceMatrix(int i, int j) const {
+    return inverse_covariance_matrix_(i, j);
   }
 
   void PrintS0Set();
@@ -50,7 +50,7 @@ class Chisquared {
   std::vector<double> s0_set_;
   boost::numeric::ublas::matrix<double> jacobian_matrix_;
   boost::numeric::ublas::matrix<double> covariance_matrix_;
-  boost::numeric::ublas::matrix<double> inverted_covariance_matrix_;
+  boost::numeric::ublas::matrix<double> inverse_covariance_matrix_;
   Constants constants_;
   ExperimentalMoment experiment_;
 
