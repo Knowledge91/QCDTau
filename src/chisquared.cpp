@@ -35,9 +35,7 @@ Chisquared::Chisquared(Constants constants, vector<double> s0Set) :
     covariance_matrix_(i, 1) = 0.;
   }
 
-  cout << covariance_matrix_ << endl;
   Numerics::InvertMatrix(covariance_matrix_, inverse_covariance_matrix_);
-  cout << inverse_covariance_matrix_ << endl;
 }
 
 void Chisquared::Minuit() {

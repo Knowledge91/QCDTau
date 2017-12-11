@@ -5,9 +5,9 @@
 
 Constants::Constants(int nc, int nf, int loops) :
     nc_(nc), nf_(nf), loops_(loops) {
-  zeta_[3] = 1.20205690315959;  // coefficients.nb
-  zeta_[5] = 1.03692775514337;  // coefficients.nb
-  zeta_[7] = 1.00834927738192;  // coefficients.nb
+  zeta_[3] = 1.2020569031595942;  // coefficients.nb
+  zeta_[5] = 1.036927755143369926;  // coefficients.nb
+  zeta_[7] = 1.008349277381922827;  // coefficients.nb
 
   beta_[1] = 11./2. - 1./3.*nf_;  // rgm06
   beta_[2] = 51./4. - 19./12.*nf_;  // rgm06
@@ -19,8 +19,10 @@ Constants::Constants(int nc, int nf, int loops) :
 
   c_[0][0] = -5./3.; c_[0][1] = 1;  // rgm06
   c_[1][1] = 1.; c_[1][2] = 0.;  //  rgm06
+  // c_[2][1] = 1.63982120489698476474;  // Matthias cVA0_const.f90
   c_[2][1] = 365./24. - 11.*zeta_[3] - (11./12. - 2./3.*zeta_[3])*nf_;
   c_[2][2] = -beta_[1]*c_[1][1]/4.; c_[2][3] = 0.;  // rgm06
+  // c_[3][1] = 6.37101448310094071138;  // Matthias cVA0_const.f90
   c_[3][1] = 87029./288. - 1103./4.*zeta_[3] + 275./6.*zeta_[5]
       +(-7847./216. + 262./9.*zeta_[3] - 25./9.*zeta_[5])*nf_
       + (151./162.-19./27.*zeta_[3])*pow(nf_, 2);  // rgm06

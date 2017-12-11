@@ -25,16 +25,16 @@ dComplex TheoreticalMoment::GetD0(dComplex s) {
   double amu = GetAlphaMu(pow(Constants::kMu, 2));
   for (int n=1; n <= 5; n++) {
     for (int k=1; k <= n; k++) {
-      sum += k*pow(amu, n)*constants_.getC(n, k)
+      sum += k*pow(amu, n)*constants_.GetC(n, k)
           *pow(GetL(s, Constants::kMu), k-1);
     }
   }
-  dComplex d0 = constants_.getNc()/12./pow(M_PI, 2)
-      *(constants_.getC(0, 1) + sum);
+  dComplex d0 = constants_.GetNc()/12./pow(M_PI, 2)
+      *(constants_.GetC(0, 1) + sum);
   for (int n=0; n <= 5; n++) {
     for (int k=1; k <= n; k++) {
       std::cout << "c(" << n << "," << k << ") \t"
-                << constants_.getC(n, k) << std::endl;
+                << constants_.GetC(n, k) << std::endl;
     }
   }
   return d0;

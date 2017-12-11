@@ -14,39 +14,50 @@ class ConstantsTest : public ::testing::Test {
 
 
 TEST_F(ConstantsTest, Zeta) {
-  ASSERT_NEAR(constants_.getZeta(3), 1.20205690315959, C::maxError);
-  ASSERT_NEAR(constants_.getZeta(5), 1.03692775514337, C::maxError);
-  ASSERT_NEAR(constants_.getZeta(7), 1.00834927738192, C::maxError);
+  // compared to Matthias: num_const.f90
+  ASSERT_DOUBLE_EQ(constants_.GetZeta(3), 1.202056903159594285);
+  ASSERT_DOUBLE_EQ(constants_.GetZeta(5), 1.036927755143369926);
+  ASSERT_DOUBLE_EQ(constants_.GetZeta(7), 1.008349277381922827);
 }
 
 TEST_F(ConstantsTest, Beta) {
-  ASSERT_NEAR(constants_.getBeta(1), 4.5, C::maxError);
-  ASSERT_NEAR(constants_.getBeta(2), 8., C::maxError);
-  ASSERT_NEAR(constants_.getBeta(3), 20.1197916666667, C::maxError*100);
-  ASSERT_NEAR(constants_.getBeta(4), 94.4560791469040, C::maxError*1000);
+  ASSERT_DOUBLE_EQ(constants_.GetBeta(1), 4.5);
+  ASSERT_DOUBLE_EQ(constants_.GetBeta(2), 8.);
+  ASSERT_DOUBLE_EQ(constants_.GetBeta(3), 20.119791666666668);
+  ASSERT_DOUBLE_EQ(constants_.GetBeta(4), 94.456079146903988);
 }
 
+
 TEST_F(ConstantsTest, Adler) {
-  ASSERT_NEAR(constants_.getC(0, 1), 1., C::maxError);
-  ASSERT_NEAR(constants_.getC(1, 1), 1., C::maxError);
-  ASSERT_NEAR(constants_.getC(1, 2), 0., C::maxError);
-  ASSERT_NEAR(constants_.getC(2, 1), 1.63982120489698, C::maxError*100);
-  ASSERT_NEAR(constants_.getC(2, 2), -1.125, C::maxError);
-  ASSERT_NEAR(constants_.getC(2, 3), 0., C::maxError);
-  ASSERT_NEAR(constants_.getC(3, 1), 6.37101448310094, C::maxError*1000);
-  ASSERT_NEAR(constants_.getC(3, 2), -5.6895977110182, C::maxError*1000);
-  ASSERT_NEAR(constants_.getC(3, 3), 1.6875, C::maxError);
-  ASSERT_NEAR(constants_.getC(3, 4), 0., C::maxError);
-  ASSERT_NEAR(constants_.getC(4, 1), 49.0757000029480, C::maxError*100000);
-  ASSERT_NEAR(constants_.getC(4, 2), -33.0914066167203, C::maxError*10000);
-  ASSERT_NEAR(constants_.getC(4, 3), 15.8015948497910, C::maxError*1000);
-  ASSERT_NEAR(constants_.getC(4, 4), -2.8476562500000, C::maxError);
-  ASSERT_NEAR(constants_.getC(4, 5), 0., C::maxError);
-  ASSERT_NEAR(constants_.getC(5, 1), 283., C::maxError);
-  ASSERT_NEAR(constants_.getC(5, 2), -299.177187205152, C::maxError*100000);
-  ASSERT_NEAR(constants_.getC(5, 3), 129.577532569234, C::maxError*10000);
-  ASSERT_NEAR(constants_.getC(5, 4), -40.616088412030 , C::maxError*1000);
-  ASSERT_NEAR(constants_.getC(5, 5), 5.1257812500000 , C::maxError);
+  // compare to coefficients.nb
+  ASSERT_DOUBLE_EQ(constants_.GetC(0, 1), 1.);
+  ASSERT_DOUBLE_EQ(constants_.GetC(1, 1), 1.);
+  ASSERT_DOUBLE_EQ(constants_.GetC(1, 2), 0.);
+  ASSERT_DOUBLE_EQ(constants_.GetC(2, 1), 1.639821204896986);
+  ASSERT_DOUBLE_EQ(constants_.GetC(2, 2), -1.125);
+  ASSERT_DOUBLE_EQ(constants_.GetC(2, 3), 0.);
+  ASSERT_DOUBLE_EQ(constants_.GetC(3, 1), 6.371014483100957);
+  ASSERT_DOUBLE_EQ(constants_.GetC(3, 2), -5.68959771101822);
+  ASSERT_DOUBLE_EQ(constants_.GetC(3, 3), 1.6875);
+  ASSERT_DOUBLE_EQ(constants_.GetC(3, 4), 0.);
+  ASSERT_DOUBLE_EQ(constants_.GetC(4, 1), 49.075700002948054);
+  ASSERT_DOUBLE_EQ(constants_.GetC(4, 2), -33.091406616720334);
+  ASSERT_DOUBLE_EQ(constants_.GetC(4, 3), 15.8015948497910);
+  ASSERT_DOUBLE_EQ(constants_.GetC(4, 4), -2.8476562500000);
+  ASSERT_DOUBLE_EQ(constants_.GetC(4, 5), 0.);
+  ASSERT_DOUBLE_EQ(constants_.GetC(5, 1), 283.);
+  ASSERT_DOUBLE_EQ(constants_.GetC(5, 2), -299.17718720515285);
+  ASSERT_DOUBLE_EQ(constants_.GetC(5, 3), 129.577532569234);
+  ASSERT_DOUBLE_EQ(constants_.GetC(5, 4), -40.61608841202971);
+  ASSERT_DOUBLE_EQ(constants_.GetC(5, 5), 5.1257812500000);
+
+  // compare to Matthias:
+  EXPECT_DOUBLE_EQ(constants_.GetC(0, 1), 1.);
+  EXPECT_DOUBLE_EQ(constants_.GetC(1, 1), 1.);
+  // EXPECT_DOUBLE_EQ(constants_.GetC(2, 1), 1.63982120489698476474);
+  //  EXPECT_DOUBLE_EQ(constants_.GetC(3, 1), 6.37101448310094071138);
+  //  EXPECT_DOUBLE_EQ(constants_.GetC(4, 1), 49.07570000294798513221);
+  EXPECT_DOUBLE_EQ(constants_.GetC(5, 1), 283.);
 }
 
 TEST_F(ConstantsTest, various) {

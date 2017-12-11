@@ -10,11 +10,11 @@ class Constants {
  public:
   Constants(int nc, int nf, int loops);
 
-  int getNf() { return nf_; }
-  int getNc() { return nc_; }
-  double getZeta(int i) { return zeta_[i]; }
-  double getBeta(int i) { return beta_[i]; }
-  double getC(int i, int j) { return c_[i][j]; }
+  int GetNf() { return nf_; }
+  int GetNc() { return nc_; }
+  double GetZeta(int i) { return zeta_[i]; }
+  double GetBeta(int i) { return beta_[i]; }
+  double GetC(int i, int j) { return c_[i][j]; }
 
   static constexpr double kAlphaSMz = 0.1181;  // PDG 2016 p.145
   static constexpr double kMz = 91.1876;  // PDG 2016 p.29

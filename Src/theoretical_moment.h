@@ -13,7 +13,7 @@
 class TheoreticalMoment {
  public:
   explicit TheoreticalMoment(Constants constants) : constants_(constants) {
-    c_run_dec_ = new CRunDec(constants.getNf());
+    c_run_dec_ = new CRunDec(constants.GetNf());
   }
 
   std::complex<double> GetSpectralMoment(double s0);
